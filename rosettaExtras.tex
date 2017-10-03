@@ -1,0 +1,95 @@
+%%% Copyright (C) Antonio Menezes Leitao Created on Thu Jul 10 11:45:49 2014
+
+\RequirePackage{latexsym}
+\RequirePackage{amssymb}
+%To avoid conflicts with TXFonts
+\RequirePackage{savesym}
+\savesymbol{iint}
+\savesymbol{iiint}
+\RequirePackage{amsmath}
+\RequirePackage{mathtools}
+\RequirePackage{palatino}
+%\RequirePackage{palatcm}
+% \usepackage[widemargins]{a4}
+%\usepackage{a4}
+\usepackage{fancyvrb}
+\usepackage{theorem}
+\usepackage{makeidx}
+\usepackage{amltikz}
+\usepackage{relsize}
+% INCOMPATIBLE WITH SCRIBBLE \usepackage{tabularx}
+\usepackage{comment}
+\usepackage{amlpaths}
+
+\newboolean{@alAnswer}
+\DeclareOption{answers}{\setboolean{@alAnswer}{true}}
+\DeclareOption{noanswers}{\setboolean{@alAnswer}{false}}
+\ProcessOptions
+
+\newboolean{@alSmall}
+\DeclareOption{smallimages}{\setboolean{@alSmall}{true}}
+\DeclareOption{bigimages}{\setboolean{@alSmall}{false}}
+\ProcessOptions
+
+%%%%%{\theorembodyfont{\rmfamily}\newtheorem{Question}{Exercício}[subsection]}
+
+\theorembodyfont{\rmfamily\smaller}
+\newtheorem{Question}{Exercicio}[section]
+
+%HACK DISABLE EXERCISES
+
+\ifthenelse{\boolean{@alAnswer}}{%
+\newenvironment{Answer}
+        {\begin{trivlist}
+  \item[] %\smaller{
+    \bf Solução do Exercício
+      \theQuestion%}
+    \samepage}
+        {\end{trivlist}}
+}{\excludecomment{Answer}}
+
+\newcommand{\imagesFolderSuffix}{AutoCAD/Render/White}%
+\newcommand{\filmsFolderSuffix}{AutoCAD/Film/White}%
+
+\newcommand{\image}[2][0.9]{\pgfimage[width=#1\textwidth]{../../../../Dropbox/Renders/AutoCAD/Render/White/#2}}
+
+\DefineVerbatimEnvironment{LispCode}{Verbatim}{formatcom=\samepage,fontsize=\smaller,commandchars=\\\{\}}
+
+\newcommand{\wraplisp}[1]{\texttt{\protect\frenchspacing\obeyspaces{}#1}}
+\newcommand{\lisp}[1]{\mbox{\spaceskip=0.8ex\wraplisp{#1}}}
+\newcommand{\lispemph}[1]{\emph{\lisp{#1}}}
+\newcommand{\si}[1]{\ensuremath{_{#1}}}
+\newcommand{\lispemphi}[2]{\lispemph{#1}\ensuremath{_{#2}}}
+
+\newcommand{\lispf}[1]{\lisp{#1}\index{\lisp{#1}}}
+
+\newcommand{\gives}{\ensuremath{\rightarrow}}
+
+\newcommand{\equives}{\ensuremath{\leftrightarrow}}
+
+\newcommand{\pascal}[1]{{\tt #1}}
+
+\newcommand{\p}{\>}
+ 
+\newcommand{\arccosh}{\operatorname{arccosh}}
+\newcommand{\arctg}{\operatorname{arctg}}
+\newcommand{\acosh}{\operatorname{acosh}}
+\newcommand{\asinh}{\operatorname{asinh}}
+\newcommand{\atanh}{\operatorname{atanh}}
+\newcommand{\asin}{\operatorname{asin}}
+\newcommand{\acos}{\operatorname{acos}}
+\newcommand{\atan}{\operatorname{atan}}
+\newcommand{\sgn}{\operatorname{sgn}}
+\newcommand{\fib}{\operatorname{fib}}
+
+\VerbatimFootnotes
+
+\def\slashiii#1{\setbox0=\hbox{$#1$}#1\hskip-\wd0\hbox to\wd0{\hss\sl/\/\hss}}
+\def\slashiv#1{#1\llap{\sl/}}
+
+\newcommand{\tinytiny}{\fontsize{4}{4.8}\selectfont}
+\newcommand{\tinytinytiny}{\fontsize{3.4}{4.1}\selectfont}
+\newcommand{\tinytinytinytiny}{\fontsize{1.0}{1.2}\selectfont}
+\newcommand{\hypertiny}{\fontsize{0.9}{1.1}\selectfont}
+
+\newcommand{\Rosetta}[1]{#1}
