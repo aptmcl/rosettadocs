@@ -6,20 +6,19 @@
 @title{Introduction}
 
 Knowledge transmission is one of the issues that has worried mankind
-throughout the ages.  As man is able to accumulate knowledge
-throughout his life, it would be unfortunate if all that knowledge
-disappeared with his death.
+through the ages. As humans gather knowledge throughout their lives,
+ it would be unfortunate if all that knowledge disappeared with their death.
 
 To avoid this loss, mankind invented a series of mechanisms to
 preserve knowledge. Firstly, oral transmission, consisting in the
-transmission of knowledge from one person to a small group of people, in a way
+transmission of knowledge from one person to a small group of people, thus
 transferring the problem of knowledge preservation to the next
 generation.  Secondly, written transmission, consisting in documenting
 knowledge.  On one hand, this approach has the great advantage of
 reaching out to a much larger group of people. On the other hand, it
 significantly reduces the loss of knowledge due to transmission
 problems. In fact, the written word allows to preserve knowledge for
-long periods of time and without the inevitable changes that occur on
+long periods of time without the inevitable changes that occur on
 a long chain of oral transmissions.
 
 It is thanks to the written word that mankind can understand and
@@ -27,23 +26,23 @@ accumulate vast amounts of knowledge, some of it dating back to
 thousands of years. Unfortunately, the written word has not always
 been able to accurately transmit what the author had in mind: the
 natural language is ambiguous and it evolves with time, making the
-interpretation of written texts a subjective task. Whether when we
-write a text or when we read, or interpret one, there are omissions,
+interpretation of written texts a subjective task. Whether we're
+writing, reading, or interpreting a text, there are omissions,
 imprecisions, errors, and ambiguities which can turn the knowledge
 transmission fallible. If the transmitted knowledge is simple, the
 receptor will most likely have enough culture and imagination to
-understand it. For the transmission of more complex knowledge,
-however,that might be much more difficult to do.
+understand it. However, the transmission of more complex knowledge might 
+be much more difficult to accomplish.
 
-When rigour in the transmission of knowledge is needed, relying on the
+When the transmission of knowledge requires rigour, relying on the
 receptor's abilities to understand it can have disastrous outcomes
 and, in fact, throughout history we can find many catastrophic events
 caused solely by insufficient or incorrect transmission of knowledge.
 
 To avoid these problems, more accurate languages were developed.
-Mathematics, in particular, has for the past millenia obsessively
-sought to construct a language that shines for its absolute
-rigour. This allows knowledge transmission to be much more accurate
+In particular, for the past millennia, Mathematics has obsessively 
+sought to construct a language that shines for its absolute rigour. 
+This allows knowledge transmission to be much more accurate
 than in other areas, reducing to the bare minimum the need for
 imagination in order to understand that knowledge.
 
@@ -53,14 +52,14 @@ we assume that the person, to whom we want to transmit that knowledge,
 knows beforehand about numbers and arithmetic operations, we could tell him
 that, @emph{to calculate the factorial of any number, one
 must multiply every number from one until that number}.
-Unfortunately, that description is too long, and worse yet, inaccurate,
+Unfortunately, that description is too long and even worse inaccurate,
 because it does not state that only integer numbers are to be
 multiplied. To avoid these imprecisions and simultaneously make the
 information more compact, Mathematics developed a set of symbols and
 concepts that should be understood by everyone. For example, to define
 the integer sequence of numbers between @${1} and @${9}, mathematics
 allows us to write @${1,2,3,\ldots,9}. In the same manner, instead of
-referring to "@emph{any number}" mathematics invented the concept of
+referring to "@emph{any number}", mathematics invented the concept of
 "@emph{variable}": a name that refers to some "thing" that can be used in
 several parts of a mathematical statement, always representing the
 same "thing". That way, Mathematics allows us to more
@@ -71,7 +70,7 @@ accurately express the factorial computation as follows:
 But is this definition rigorous enough? Is it possible to interpret it
 without requiring imagination to figure the author's intention?
 Apparently, it is but there is a detail in this definition that
-@emph{requires} imagination: the ellipses. The ellipses indicate that the
+@emph{requires} imagination: the ellipses points. The ellipses indicate that the
 the reader must imagine what should be in its place. Although most readers
 will correctly understand that the author meant the multiplication of the sequential
 numbers, some might think to replace the ellipsis with something
@@ -85,18 +84,18 @@ in the formula, we get:
 @$${2! = 1\times 2\times 3\times \cdots{} \times 2}
 
 In this case, the computation makes no sense, which shows that, in
-fact, imagination is need for more than just on how to fill in the ellipsis: 
-the number of terms to consider depends on the number to which
-we want to calculate the factorial. 
+fact, for more than just on how to fill in the ellipsis points, imagination is 
+required: to realize that the number of terms to consider depends on the number 
+to which we want to calculate the factorial. 
 
 Assuming that our reader has enough imagination to figure out
-this particular detail, he would easily calculate that @${2!=1\times
+this subtlety, he would easily calculate that @${2!=1\times
 2=2}. But even then, there will be cases where it is not that clear.
-For example, what is the factorial of zero? The answer does not
-appear to be obvious. What about the factorial of @${-1}? Again, it is not
-clear. And the factorial of @${4.5}?. Once again the formula says
-nothing regarding these situations and our imagination can not guess
-the correct procedure.
+For example, what is the factorial of @${0}? The answer does not
+appear to be obvious. What about the factorial of @${-1} or the factorial of 
+@${4.5}?. Again, the answer to these questions is unclear as the formula says 
+nothing regarding these situations and our imagination can not guess the correct 
+procedure.
 
 Would it be possible to find a way of transmitting the knowledge
 required to compute the factorial function that minimizes
@@ -110,9 +109,9 @@ n \cdot (n-1)!, & \text{if $n\in \mathbb{N}$.}
 \end{cases}}
 
 Have we reached the necessary rigour that requires no imagination on the
-reader's part? One way to find out is with the previous cases that gave us problems.
-Fist of all, there are no ellipsis, which is positive. Secondly, for the factorial
-of the number @${2} we will have that:
+reader's part? One way to find out is to consider the previous cases that gave 
+us problems. Fist of all, there are no ellipsis points, which is positive. 
+Secondly, for the factorial of the number @${2}, we will have:
 
 @$${2!=2\times 1!=2\times (1\times 0!)=2\times (1\times 1)=2\times 1=2}
 
@@ -123,25 +122,25 @@ applied to @${\mathbb{N}_0} members}.
 
 This example shows that, even in mathematics, there are different levels
 of rigour in the different ways that is possible to transmit knowledge.
-Some require more imagination than others but in general they have been
-enough for Mankind to preserve knowledge throughout history.
+Some require more imagination than others but, in general, they have been
+enough for mankind to preserve knowledge throughout history.
 
-It so happens that nowadays Mankind has a partner that has been giving a huge
-contribution to its progress: @emph{the computer}. This machine has
-the extraordinary capability of instructed on how to execute a complex set of
-tasks. Programming is essentially all about transmitting to a
-computer the knowledge needed to solve a specific problem. This
-knowledge is called a @emph{program}. Because they are
-@emph{programable}, computers have been used for the most diversified
-ends, and in the last decades they have radically changed the way we work.
-Unfortunately, the computer's extraordinary ability
-to learn comes with an equal extraordinary lack of imagination. A computer
-does assume or imagine, it just rigorously interprets
-the knowledge transmitted in the form of a program.
+Nowadays mankind has a partner that has been making valuable contributions to 
+the progress of knowledge preservation: @emph{the computer}. This machine has
+an extraordinary capability: given a set of instructions, it knows how to 
+execute a complex set of tasks. Programming is essentially all about 
+transmitting to a computer the knowledge needed to solve a specific problem. 
+This knowledge is called a @emph{program}. Due to computers being 
+@emph{programmable}, they have been used for various purposes, and for the last 
+decades they have radically changed the way we work.
+Unfortunately, the computer's extraordinary ability to learn comes with an 
+equal extraordinary lack of imagination. A computer does not assume or imagine, 
+it rigorously interprets the knowledge that is transmitted in the form of a 
+program.
 
-Since it has no imagination the computer depends critically on the way
-we present it the knowledge that we wish to transmit: that knowledge must
-be described in such a way that no ambiguity, gaps or imprecision. A language
+Since it has no imagination the computer critically depends on how
+we present the knowledge that we wish to transmit: that knowledge description 
+must not be ambiguous, nor contain gaps, nor imprecisions. A language
 with these characteristics is generally called a @emph{programming language}.
 
 

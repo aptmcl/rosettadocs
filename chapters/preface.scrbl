@@ -22,7 +22,7 @@ several architectural students and teachers and asked them to explain
 to me what they did and how they did it. What I heard and saw was revealing.
 
 Despite the enormous progresses that Computer-Aided-Design (CAD) brought
-to the profession, the truth is that its use continuous to be manual,
+to the profession, the truth is that its use continues to be manual,
 laborious, repetitive and boring. The creation of a digital model in a CAD
 tool requires extreme attention to detail, distracting from what is fundamental:
 the idea. Frequently, the obstacles found end up forcing the Architect
@@ -40,8 +40,7 @@ Architect.
 
 The programming practice is intellectually very stimulating but it is also a challenge.
 It implies the need to master a new language, it implies a new way of thinking. Frequently,
-that effort makes several people give up but to the ones that prevail in overcoming
-the initial difficulties, they acquire the skill to go further in the creation of
-innovative architectural solutions.
+that effort makes several people give up but those who prevail over the initial difficulties 
+acquire the skills to go further in the creation of innovative architectural solutions.
 
 This books aims to meet those Architects.
