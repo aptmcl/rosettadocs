@@ -438,7 +438,7 @@ Define the @fn[balanced-circles] function that allows the creation of any of the
 
 @;centered[@tex{\autodrawing{equilibrioCirculos}}]
 
-Note that the circles have radiuses that are in a geometrical
+Note that the circles have radii that are in a geometrical
 progression ratio of @${f}, with @${0 <f < 1}. That way, each circle
 (except the first one) has a radius that is the product of @${f} by
 the radius of the largest circle in which it stands. The smallest circle
@@ -634,7 +634,7 @@ Define a @fn[circles] function capable of creating the illustration presented be
 
 @centered[@(show-tikz 0.4 "ultra thick")]
 
-Note that the circles have radiuses that are in geometrical progression
+Note that the circles have radii that are in geometrical progression
 ratio of @${\frac{1}{2}}. In other words, the smaller circles
 have half the radius of the adjacent larger circle. The smallest
 circles of all have a radius greater or equal to @${0.1}. The function should
@@ -719,11 +719,11 @@ in the previous schema.
 
 @section{Doric Temples}
 
-With Vitruvius we have seen that the Greeks created an elaborate
+With Vitruvius, we have seen that the Greeks created an elaborate
 proportion system for columns. These columns were used to form
 @emph{porticos}, wherein a succession of columns crowned with a roof served
 as the entrance for buildings and, in particular, for temples. When this
-arrangement of columns was projected from the building it was called prostyle,
+arrangement of columns was placed in front of the building it was called prostyle,
 and it was classified according to the number of columns in its composition
 as Diastyle, Tristyle, Tetrastyle, Pentastyle, Hexastyle, etc. When the prostyle
 was extended to the whole building, placing columns all around it, it was called
@@ -731,11 +731,11 @@ peristyle.
 
 In addition to describing the proportions of columns, Vitruvius also explained in
 his famous treaty the rules that the construction of temples had to follow, in particular,
-regarding their orientation, which should be from east to west. and regarding the
+regarding their orientation, which should be from east to west, and regarding the
 spacing between columns, distinguishing several cases of temples from those with a
-very reduced spacing (@emph{pycnostyle}) to temples with excessively large columns
+very reduced spacing (@emph{pycnostyle}), to temples with excessively large columns
 spacing (@emph{araeostilo}), including the style which he considered to have the best
-proportion (@emph{eustilo}) in which the spacing between columns is variable, being
+proportion (@emph{eustilo}), in which the spacing between columns is variable, being
 larger in the central columns.
 
 To simplify our implementation we will ignore these details and,instead of distinguishing
@@ -753,8 +753,8 @@ linearly in a particular direction, as sketched in @figref{fig:colunasLinhaRecta
 To this moment, we have considered coordinates as mere positions in space. Now, in
 order to model this temple, it will be useful to adopt a @emph{vectorial}
 perspective of the concept of coordinates. In this perspective, coordinates are seen
-as the tips of vectors positioned at the origin. This can be seen in @figref{fig:colunasLinhaRecta}
-where we have marked the position of two columns  with the vectors @${P} and @${Q}.
+as the tips of vectors positioned at the origin. This can be seen in @figref{fig:colunasLinhaRecta},
+where we have marked the position of two columns with the vectors @${P} and @${Q}.
 
 With all vectors being positioned at the origin it becomes irrelevant to mention it, which
 allows us to characterize vectors as having only a magnitude and a direction.  It is easy to
@@ -763,7 +763,7 @@ i.e., the distance from the origin to the tip of the vector and the angle that t
 with the @${X} axis.
 
 The great advantage of adopting the vectorial perspective is that it enables us to conceive an
-@emph{algebra} for operating with vectors. For example, the sum of vector is a vector whose components
+@emph{algebra} for operating with vectors. For example, the sum of vectors is a vector whose components
 are the sum of corresponding components, i.e., 
 @$${P + Q = (P_x + Q_x, P_y + Q_y, P_z + Q_z)}
 
@@ -832,7 +832,7 @@ the position of the next column through @${P+\vec{v}}. This reasoning allows
 us to first define a function to create a row of columns. This function will
 have as parameters the coordinates @${P} of the base of the first column, the
 height @${h} of the column, the vector @${\vec{v}} separating the axes of the
-columns and also the number @${n} of columns that we wish to create. The reasoning
+columns, and also the number @${n} of columns that we wish to create. The reasoning
 behind the definition of this function is, once more, recursive:
 
 @itemlist[
@@ -845,7 +845,7 @@ actions that we wish to perform sequentially, we need to use the operator
 @stx{begin} to group a joint action.}
 ]
 
-The translation of this process to Racket we have:
+The translation of this process to Racket is the following:
 
 @lispcode[
 (define (doric-columns p h v n)
@@ -859,16 +859,16 @@ The translation of this process to Racket we have:
                      (- n 1)))))
 ]
 
-We can test the creating of columns using, for example:
+We can test the creation of the columns using, for example:
 
 @lispcode[
 (doric-columns (xy 0 0) 10 (xy 5 0) 8)
 ]
 
-of which result is presented in @figref{fig:colunasDoricas4}.
+from which we obtain the result presented in @figref{fig:colunasDoricas4}.
 
 @figure[#:tag "fig:colunasDoricas4"
-	#:caption @elem{A perspective of a set of eight Doric columns with
+	#:caption @elem{A perspective view of a set of eight Doric columns with
    @${10} units of height and @${5} spacing units between columns along the @${x} axis.}]{
 @tex{\centering
   \autoimage{colunasFila}
@@ -878,8 +878,8 @@ of which result is presented in @figref{fig:colunasDoricas4}.
 Although the use of separation vectors between columns is relatively simple, it is
 possible to simplify that process even further by calculating the vector value based
 on the start and end points of the row of columns. Using the @fn[doric-columns] function,
-define a function called @fn[doric-columns-between] that given centre points @${P} and @${Q}
-of the first and final columns, the height @${h} of the columns and finally the number of
+define a function called @fn[doric-columns-between] that given the centre points @${P} and @${Q}
+of the first and final columns, the height @${h} of the columns, and finally the number of
 columns, creates a row of columns between those two points.
 
 As an example, the following image shows the result of evaluating the following expressions:
@@ -898,11 +898,11 @@ From the moment we know how to create rows of columns, it becomes easy
 to create the four necessary rows for building peristyle temples.
 Normally, the description of these temples is done in terms
 of the number of columns at the front and at the side, assuming
-that the columns oat the corners count for both rows. This means that,
-for example, a temple with @${6 \times 12} columns there are actually
-only @${4 \times 2 + 10 \times 2 + 4 = 32} columns. For creating the
-peristyle, besides the number of columns at the front and side, we need to
-know the position of the columns at the extremities of the temple and obviously the
+that the columns at the corners count for both rows. This means that,
+for example, in a temple with @${6 \times 12} columns, there are actually
+only @${4 \times 2 + 10 \times 2 + 4 = 32} columns. To create the
+peristyle, in addition to the number of columns at the front and side, we need to
+know the position of the columns at the extremities of the temple and, obviously, the
 column's height.
 
 In terms of the algorithm, we start by creating one of the corners of
@@ -943,11 +943,11 @@ of this temple is then:
 (doric-peristyle (xy 0 0) 9 (xy 4.8 0) 6 (xy 0 4.6) 14)
 ]
 
-The result of evaluating the above expression is shown in @figref{fig:segesta2}.
+The result of evaluating the expression above is shown in @figref{fig:segesta2}.
 
 @figure[#:tag "fig:segesta2"
 	#:caption @elem{An overview of the peristyle of the temple of Segesta. The columns were 
-                        generated by the @fn[peristyle-doric] function using as parameters,
+                        generated by the @fn[peristyle-doric] function, using as parameters
                         @${6} columns on the front and @${14} on the side, with a column distance of @${4.8} meters 
                         on the front and @${4.6} meters on the sides, with columns @${9} meters high.}]{
 @tex{\centering
@@ -955,8 +955,8 @@ The result of evaluating the above expression is shown in @figref{fig:segesta2}.
 
 Although the vast majority of Greek temples were rectangular, circular temples
 were also built, called @emph{Tholos}. The Sanctuary of Athena Pronaia at Delphi 
-has a good example of one such buildings. Although little remains of this temple
-is not difficult to imagine its original shape based on what is still remains, shown in
+has a good example of one such buildings. Although little remains of this temple, it
+is not difficult to imagine its original shape based on what still remains, shown in
 @figref{fig:tholosAtena2}.
 
 @figure[#:tag "fig:tholosAtena2"
@@ -967,13 +967,13 @@ To simplify the construction of the @emph{Tholos} temple, we will
 divide it into two parts. In one of them we will create the base and
 on the second one we will position the columns.
 
-For designing the base we can consider a set of flattened cylinders,
+To design the base, we can consider a set of flattened cylinders,
 stacked to form the circular steps, as shown in @figref{fig:esquemaBaseTholos}.
-Thus, the total base height @${a_b} will be divided in steps of @${\Delta a_b} and the base radius will
+Thus, the total base height @${a_b} will be divided in steps of @${\Delta a_b}, and the base radius will
 also be divided in @${\Delta r_b} steps.
 
 @figure[#:tag "fig:esquemaBaseTholos"
-	#:caption @elem{A @emph{Tholos} base section. The base is composed by a sequence of stacked cylinders whose base
+	#:caption @elem{A @emph{Tholos} base section. The base is composed by a sequence of stacked cylinders, whose base
 	radius @${R_B} shrinks @${\Delta r_b} each step and whose height grows in increments of @${\Delta a_b} in every step.}]{
 @tex{\centering
 \begin{tikzpicture}
@@ -981,15 +981,15 @@ also be divided in @${\Delta r_b} steps.
 \end{tikzpicture}
 }}
 
-For each cylinder we have to consider its @lisp[radius] and the
-@lisp[d-height] of each step. To draw the next cylinder we have also
-to consider the radius increment @${d-radius} due to the step's
+For each cylinder, we have to consider its @lisp[radius] and the
+@lisp[d-height] of each step. To draw the next cylinder, we have also
+to consider the radius increment @${d-radius}, due to the step's
 length. These steps will be built using a recursive process:
 
 @itemlist[
 @item{If the number of steps to create is zero, nothing needs to be done.}
 @item{Otherwise, we place a step (modelled with a cylinder) with the given radius and height and, recursively,
-we place the remaining steps on top of this one, i.e., at a height equal to the steps being placed and a radius
+we place the remaining steps on top of this one, i.e., at a height equal to the steps being placed, and with a radius
 reduced from the length of the steps being placed.}
 ]
 
@@ -1008,7 +1008,7 @@ This process is implemented by the following function:
                    d-radius))))
 ]
 
-For the positioning of columns we will also consider a process wherein
+For the positioning of columns, we will also consider a process wherein
 at each step we only place one column at a given position and, recursively,
 we place the remaining columns from the next circular position.
 
@@ -1020,15 +1020,15 @@ that position and then places the other columns using the same radius but
 increments of @${\Delta\phi} to @${\phi}, as shown in
 @figref{fig:esquemaTholos}. The angular increment @${\Delta\phi} is
 obtained by dividing the circumference by the @${n} number of columns
-to place, i.e., @${\Delta\phi=\frac{2\pi}{n}}. Because the columns are
+to place, i.e., @${\Delta\phi=\frac{2\pi}{n}}. Since the columns are
 arranged around a circle, the calculation of the coordinates of each
-column is facilitated with the use of polar coordinates. With this algorithm,
-in mind the function definition is thus:
+column is facilitated with the use of polar coordinates. With this algorithm
+in mind,the function definition is as follows:
 
 @figure[#:tag "fig:esquemaTholos"
-	#:caption @elem{Scheme of the construction of a @emph{Tholos}: @${r_b} is the base radius, @${r_p} is the
+	#:caption @elem{Schema of the construction of a @emph{Tholos}: @${r_b} is the base radius, @${r_p} is the
 	distance from the centre of the columns to the centre of the base, @${a_p} is the column's height,
-	@${a_b} is the base's height, the @${\phi} is the initial angle of the columns and @${\Delta\phi} is
+	@${a_b} is the base's height, the @${\phi} is the initial angle of the columns, and @${\Delta\phi} is
 	the angle between columns.}]{
 @tex{\centering
 \begin{tikzpicture}[scale=5]
@@ -1050,7 +1050,7 @@ in mind the function definition is thus:
                       height))))
 ]
 
-Finally we define the function @fn[tholos] which, given the necessary parameters
+Finally, we define the function @fn[tholos], which, given the necessary parameters
 to the two previous functions, invokes them sequentially:
 
 @lispcode[
@@ -1065,7 +1065,7 @@ to the two previous functions, invokes them sequentially:
 ]
 
 @Figref{fig:tholosAthena} shows the image generated by the evaluation
-the following expression:
+of the following expression:
 
 @lispcode[
 (tholos (xyz 0 0 0) 3 7.9 0.2 0.2 20 7 4)
@@ -1082,7 +1082,7 @@ the following expression:
 the various columns are parallel to each other (and also to the
 abscissas and ordinate axes) when, in fact, they should have a radial
 orientation. This difference is evident when we compare a top view
-of the current design (left) with the view of the correct drawing
+of the current design (left) with the view of the correct design
 (right):
 
 @fig[@autoimage{tholosRodado}]
@@ -1092,7 +1092,7 @@ is oriented properly in relation to the @emph{Tholos} centre.
 }
 
 @question{
-Consider the construction of a tower made of several modules in which
+Consider the construction of a tower made of several modules, in which
 each module has exactly the same characteristics of a @emph{Tholos},
 as presented in the figure below, on the left side:
 
@@ -1102,25 +1102,25 @@ The top of the tower has a similar shape to the @emph{Tholos} base but
 with more steps.
 
 Define the function @fn[Tholos-tower] that, from the centre of the
-tower's base, the number of modules, the top number of steps and other
+tower's base, the number of modules, the top number of steps, and other
 required parameters to define a module identical to the @emph{Tholos},
 builds the tower presented above.
 
 Try to create a tower with @${6} modules, @${10} steps at the top,
 @${3} steps per module, each with the same length and height @${0.2},
-with @${7.9} base radius and with @${20} columns per module, with a
+with @${7.9} base radius, and with @${20} columns per module, with a
 peristyle radius of @${7} and with columns measuring @${4} meters. }
 
 @question{
 Based on the previous answer, redefine the tower's construction so
-that the radial dimension decreases with the height, like the image on the
-centre of the previous image.  }
+that the radial dimension decreases with the height, like the tower
+on the centre of the previous image.  }
 
 
 @question{
 Based on the previous answer, redefine the tower's construction so
-that the number of columns decreases with height, like the image on
-the right side of the same previous image.  }
+that the number of columns decreases with height, like the tower on
+the right side of the previous image.  }
 
 @question{
 Consider the creation of a city in space, composed only by cylinders
@@ -1136,8 +1136,8 @@ the image is focused.}
 
 @fig[@autoimage{cidadeEspacialStereo}]
 
-Define a function that starting from the city centre and the central
-cylinders radius creates a city similar to the presented one.}
+Define a function that, starting from the city centre and the central
+cylinders radius, creates a city similar to the presented one.}
 
 
 @section{Ionic Order}
@@ -1155,10 +1155,10 @@ volutes from the antiquity, their drawing process was never clear.
 
 Vitruvius, in his architectural treatise, describes the Ionian
 volute: a spiral-shaped curve that starts at the base of the abacus,
-unfolds into a series of turns and joins with a circular element called the
+unfolds into a series of turns and joins with a circular element, called the
 @emph{eye}. Vitruvius describes the spiral drawing process through a
 composition of fourths of a circumference, starting at the outermost point
-and decreasing the radius every quarter of a circumference, until joining with
+and decreasing the radius in each quarter of a circumference, until joining with
 the eye. In this description there are still some
 details to be explained, in particular the position the centres of the fourths of
 circumference. Vitruvius adds that a calculation and a figure will be added
@@ -1171,16 +1171,16 @@ evident when analysis performed on the many volutes that survived the antiquity
 revealed differences to the proportions described by Vitruvius.
 
 During the Renaissance period, these doubts made researchers
-rethink Vitruvius' method and suggesting personal interpretations or
+rethink Vitruvius' method and suggest personal interpretations or
 new methods for designing volutes. Of particular relevance are the methods
 proposed in the sixteenth century by Sebastiano Serlio, based on the
 composition of the semi-circumferences, by Giuseppe Salviati, based on the
-composition of quarters of a circumferences and by
+composition of quarters of a circumferences, and by
 Guillaume Philandrier, based on the composition of eighths of a
 circumference.
 
 All those methods differ in many details but, generically, they are all
-based on using arcs of a circumference of constant angles  but with a decreasing
+based on using arcs of a circumference of constant angles but with a decreasing
 radius. Obviously, for there to be continuity between the arcs, their centres
 change as they are being drawn. @Figref{fig:spiral} presents
 the process of drawing spirals using quarters of a circumference.
@@ -1195,13 +1195,13 @@ the process of drawing spirals using quarters of a circumference.
 
 As shown in this figure, in order to draw the spiral we must draw
 successive circumference quarters. The first circumference quarter
-will be centred at the point @${p} and have a radius @${r}. This first
+will be centred at point @${p} with a radius @${r}. This first
 radius goes from the angle @${\pi/2} to @${\pi}. The second
-circumference quarter will be centred at the point @${P_1} and will have
-a radius of @${r\cdot f}, with @${f} being "reduction" factor for the spiral.
+circumference quarter will be centred at point @${P_1} and will have
+a radius of @${r\cdot f}, with @${f} being the "reduction" factor for the spiral.
 This second arc goes from @${\pi} to @${\frac{3}{2}\pi}. An important detail
 is the relationship between the coordinates of @${P} and @${P_1}: for the second
-arc to have its end coincidental with the first arc its centre must be at the end of the
+arc to have its end coincidental with the first arc, its centre must be at the end of the
 vector @${\vec{v}_0} starting at @${P}, measuring @${r\cdot(1-f)} and with an
 angle equal to the final angle of the end of the first arc.
 
@@ -1218,7 +1218,7 @@ a smaller spiral. More accurately, we can specify the drawing of a
 spiral centred at the point @${P}, radius @${r} and
 initial angle @${\alpha} as a drawing of a circumference arc of radius @${r},
 centred at @${P}, with an initial angle of @${\alpha} and a final
-angle of @${\alpha + \frac{\pi}{2}} followed by a spiral centred at
+angle of @${\alpha + \frac{\pi}{2}}, followed by a spiral centred at
 @${P+\vec{v}}, with a radius of @${r\cdot f} and initial angle of @${\alpha
 + \frac{\pi}{2}}. The vector @${\vec{v}} will be positioned at @${P},
 have a length of @${r\cdot(1-f)} and an angle @${\alpha + \frac{\pi}{2}}.
@@ -1232,8 +1232,8 @@ stopping condition, and there are (at least) two possibilities:
 @item{End when the angle @${\alpha} is higher than a certain limit.}
 ]
 
-For now, let's consider the first possibility. According to the
-described process, let's define the function that draws the spiral
+For now, let us consider the first possibility. According to the
+described process, let us define the function that draws the spiral
 with the following parameters: the @lisp[p] starting point, the
 @lisp[r] initial radius, the @lisp[a] initial angle, the @lisp[n]
 number of quarter circles, and the @lisp[f] reduction factor:
@@ -1256,7 +1256,7 @@ in terms of itself. Obviously, the recursive case is simpler
 than the original case, since the number of circle quarters is
 smaller, progressively approaching the stopping condition.
 
-To draw the circumference quarter we will use Racket's @fn[arc] operation
+To draw the circumference quarter we will use Racket's @fn[arc] operation,
 which receives the circumference centre and radius, and the initial and
 final angles of the arc. To better understand this spiral
 drawing process, let us also draw two lines starting at the
@@ -1297,14 +1297,14 @@ this increment was also a parameter.
   \end{tikzpicture}
 }}
 
-As can be deduced from observing @figref{fig:espiralDA} the required
-modifications are relatively trivial, there is only the need to add the
+As can be deduced from observing @figref{fig:espiralDA}, the required
+modifications are relatively trivial: there is only the need to add the
 parameter @lisp[da], representing the angle increment @${\Delta_\alpha} of each
 arc, and replace the occurrences of @${\frac{\pi}{2}} with this new parameter.
 Naturally, instead of drawing a quarter of a circle, we will now have to draw a
 circumference arc of angular amplitude @${\Delta_\alpha}. Seeing as the use of this parameter
-also affects the meaning of the parameter @${n}, which now will
-represent the number of arcs with that amplitude, it will advisable
+also affects the meaning of the parameter @${n}, which will now 
+represent the number of arcs with that amplitude, it is advisable
 to explore a different stopping condition, based on the intended final angle
 @lisp[fa]. However, we need to be mindful of one detail: the last arc may not be a
 complete arc if the difference between the final and first angle exceeds
@@ -1361,7 +1361,7 @@ by the following expressions are shown in @figref{fig:espiral2}:
 
 Another possibility is to change the angle increment. The following
 expressions test approximations to Sebastiano Serlio's approach (semi-circumferences),
-Giuseppe Salviati's approach (circumference-quarters) and Guillaume Philandrier's approach
+Giuseppe Salviati's approach (circumference-quarters), and Guillaume Philandrier's approach
 (circumference-eights) @footnote{Note that these are mere approximations. The original methods
 were much more complex.}
 
@@ -1381,9 +1381,9 @@ The results are shown in @figref{fig:espiral3}.
 @(show-tikz 2)
 }
 
-Finally, in order to compare the different spirals construction
+Finally, in order to compare the different spirals' construction
 processes, we should adjust the reduction coefficient to the angle
-increment so that the reduction is applied to one whole turn and not
+increment, so that the reduction is applied to one whole turn and not
 just to the chosen angle increment. Thus, we 
 have the following expressions:
 
@@ -1412,7 +1412,7 @@ with @${\varphi=\frac{1 + \sqrt{5}}{2}} being the @emph{golden
 ratio}, popularized by Luca Pacioli in his 1509's work @emph{Divina
 Proporzione}, although there are numerous accounts of its use many years before. 
 
-The following drawing illustrates a golden spiral with arcs inscribed in the correspondent @emph{golden
+The following drawing illustrates a golden spiral, with arcs inscribed in the correspondent @emph{golden
 rectangle}, in which one side is @${\varphi} times bigger than the
 smaller side.
 
@@ -1432,13 +1432,13 @@ into a square and another golden rectangle.
 
 Redefine the @fn[spiral-arc] function so that, in addition to
 creating an arc, it also creates the enveloping square. Then write the
-Racket's expression to create the golden spiral above.  }
+Racket's expression to create the golden spiral showned above.  }
 
 @question{
 An @emph{oval} is a geometrical figure that corresponds to the outline
 of birds eggs. Given the variety of egg forms in Nature, is natural
-to consider that, there are many geometric ovals. The following figure
-shows some examples where some of the parameters that characterize the oval 
+to consider that there are many geometric ovals. The following figure
+shows some examples, where some of the parameters that characterize the oval 
 are systematically changed:
 
 @def/no-show[
@@ -1469,13 +1469,13 @@ following image:
 ]
 
 The circular arcs needed to draw the oval are defined by the
-radii @${r_0}, @${r_1} and @${r_2}. Note that the circular arc of
+radii @${r_0}, @${r_1}, and @${r_2}. Note that the circular arc of
 radius @${r_0} covers an angle of @${\pi} and the circular arc of radius
 @${r_2} covers an angle of @${\alpha}.
 
 Define the @fn[oval] function that draws an egg. The function should
 receive as parameters only the coordinates of the point @${P}, the @${r_0}
-and @${r_1} radii and the egg's height @${h}.}
+and @${r_1} radii, and the egg's height @${h}.}
 
 @question{
 Define the @fn[cylinder-pyramid] function that builds a pyramid of
@@ -1494,14 +1494,14 @@ for example exhibit irregularities that when observed at an
 appropriate scale are identical to @ldots mountains. A river has
 tributaries and each tributary is identical to @ldots a river. A
 blood vessel has branches and each branch is identical to @ldots a
-blood vessel. All these natural entities are examples recursive
+blood vessel. All these natural entities are examples of recursive
 structures.
 
 A tree is another good example of a recursive structure, since tree
 branches are as small trees growing from the trunk. As it can be seen
-in @figref{fig:arvores0}, from each tree branch there are other
-small trees structures growing from them, a process which repeats itself
-until a dimensions is sufficiently small for other structures starting to
+in @figref{fig:arvores0}, in each tree branch there are other
+small tree structures growing from them, a process which repeats itself
+until it reaches a sufficiently small dimension for other structures to star to
 appear, such as leaves, flowers, fruits, pine cones, etc.
 
 @figure[#:tag "fig:arvores0"
@@ -1511,14 +1511,14 @@ appear, such as leaves, flowers, fruits, pine cones, etc.
 If, in fact, a tree has a recursive structure then it should be
 possible to "build" trees with recursive functions.  To test this
 theory let us begin by considering a very simplistic version of a tree,
-where we have a trunk that from a certain height is divided into two. Each
-of these sub-trunks grows with an angle from the trunk from which it
+where we have a trunk is divided into two at a certain height. Each
+of these sub-trunks grows in an angle with the trunk from which it
 originated and reaches a certain length that is a fraction of the initial
 trunk's length, as shown in @figref{fig:arvoreEsquema1}. The
-stopping condition is reached when the length of the trunk become so small
-that, instead of continuing dividing itself, another structure simply
+stopping condition is reached when the length of the trunk becomes so small
+that, instead of continuing to divide itself, another structure simply
 appears. To simplify, let us designate the extremity of a branch with a leaf
-and we will represent them with a small circle..
+that we will represent with a small circle.
 
 @figure[#:tag "fig:arvoreEsquema1"
         #:caption @elem{Drawing parameters of a tree.}]{
@@ -1526,16 +1526,16 @@ and we will represent them with a small circle..
 \inputtikz{arvoreEsquema1}
 \end{tikzpicture}}}
 
-To give some dimension to the tree, let us consider that @fn[tree] function
-receives as arguments: the point coordinate @${P} of the tree base, the
-length @${c} of the trunk and the angle @${\alpha} that it makes with its
+To give some dimension to the tree, let us consider that the @fn[tree] function
+receives as arguments: the coordinate @${P} of the tree base, the
+length @${c} of the trunk, and the angle @${\alpha} that it makes with its
 origin. For the recursive phase, we will have as parameters the opening
 angle difference @${\Delta_\alpha} that the new branch should make with the
 previous one and the reduction coefficient @${f} for the trunk's
 length. The first step is to compute the top of the trunk by using the
 function @fn[+pol]. Next we draw the trunk from base to the top.
 Finally, we test if the drawn trunk is sufficiently small. If it is, we
-finish with the drawing of a circle centred at top. Otherwise we
+finish with the drawing of a circle centred at the top. Otherwise, we
 make a double recursion to draw a sub-tree on the right and
 another on the left. The definition of the function is then:
 
@@ -1608,8 +1608,8 @@ reduction coefficient, we will apply two, as presented in @figref{fig:arvoreEsqu
 \end{tikzpicture}
 }}
 
-The @fn[tree] function transformation to receive the new parameters
-is trivial:
+The changes that we have to do to the @fn[tree] function to receive the new parameters
+are trivial:
 
 @def/no-results[
 (define (tree p c a da0 f0 da1 f1)
@@ -1629,7 +1629,7 @@ is trivial:
 ]
 
 The @figref{fig:arvores2} presents new examples of trees with
-different opening angles and branches reduction coefficients on both
+different opening angles and branch reduction coefficients on both
 left and right sides, generated by the following expressions:
 
 @def/no-results[
@@ -1641,7 +1641,7 @@ left and right sides, generated by the following expressions:
 ]
 
 @figure[#:tag "fig:arvores2"
-	#:caption @elem{Various trees generated with different opening angles and the length reduction coefficients for both left and right sides.}]{
+	#:caption @elem{Various trees generated with different opening angles and length reduction coefficients for both left and right sides.}]{
 @(show-tikz 0.1 "ultra thick")}
 
 The trees generated by the @fn[tree] function are only a poor model
