@@ -33,7 +33,7 @@ this process and simply define the exponentiation function which, from
 two numbers (@emph{base} and @emph{exponent}) computes the first one
 raised to the power of the second one.
 
-However, what we did for the @fn[fourth-power], the @fn[cube] and the
+However, what we did for the @fn[fourth-power], the @fn[cube], and the
 @fn[square] gives us an important clue: @emph{if we have a function that
 computes the exponentiation with the immediately lower exponent, then we
 only need one additional multiplication to compute the exponentiation with
@@ -48,9 +48,9 @@ In other words, we have:
 
 Although we were able to simplify our power calculation problem, there
 is still one unanswered question: how can we calculate the power
-immediately below? The answer may not be obvious but once understood, it
-is trivial: @emph{the exponentiation immediately lower to the
-exponentiation of exponent n is the exponentiation to the power of @${n-1}}.
+immediately below? The answer may not be obvious, but once understood it
+is trivial: @emph{the exponentiation directly below to the
+power of exponent n is the exponentiation to the power of @${n-1}}.
 That implies that @lisp[(inferior-power x n)] is exactly the same as
 @lisp[(power x (- n 1))]. Based on this idea, we can rewrite the previous definition:
 
@@ -61,13 +61,14 @@ That implies that @lisp[(inferior-power x n)] is exactly the same as
 
 In spite of our ingenious solution this definition has a problem: regardless of
 the exponentiation we try to compute, we will never be able to get the a final
-result. In order to understand this problem it is simpler to consider a real case:
+result. In order to understand this problem, it is simpler to consider a real case:
 let us try to calculate the third power of the number @${4}, i.e., @lisp[(power 4 3)].
 
-For this, according to the @fn[power] function definition, we will need to evaluate
+To do this, according to the @fn[power] function definition, we will need to evaluate
 the following expression:
 
 @evaluation-steps[
+(power 4 3)
 (* (power 4 2) 4)
 (* (* (power 4 1) 4) 4)
 (* (* (* (power 4 0) 4) 4) 4)
@@ -81,8 +82,8 @@ to the fact that we reduced the power calculation of a number
 raised to an exponent to the power calculation of this number raised
 to an exponent immediately below it, but we have not said in which
 situation we already have a simple enough exponent to which the solution
-is immediate. Which is the situation where this happens? We have seen that
-when the exponent is @${2} the @fn[square] function returns the correct answer
+is immediate. In which situation does this happen? We have seen that
+when the exponent is @${2}, the @fn[square] function returns the correct answer,
 so the case @${n = 2} is sufficiently simple. However, it is possible to have
 an even simpler case: when the exponent is @${1}, the result is simply the base
 value. Finally, the simplest case of all: when the exponent is @${0}, the result
@@ -125,7 +126,7 @@ use is obvious when we "unwrap" the evaluation process for the @lisp[(power 4 3)
 The @emph{recursion} is the mechanism that allows a function to call
 upon itself during its own evaluation process. Recursion is one of the most
 important programming tools, so it is important we understand it well. Many
-apparently complex problems usually have surprisingly simple recursive solutions.
+problems that seem to be complex, usually have surprisingly simple recursive solutions.
 
 There are countless examples of recursive functions. One of the
 simplest is the factorial function that is defined mathematically as:
@@ -155,8 +156,8 @@ If we analyse the factorial function, the stopping criterion is the equality tes
 to zero @lisp[(zero? n)], the immediate result is @lisp[1], and the recursive case
 is obviously @lisp[(* n (factorial (- n 1)))].
 
-Usually, a recursive function is only correct if it has a conditional statement
-which identifies the basic case but this needs not be mandatory. Invoking a recursive
+Usually, a recursive function is only correct if it has a conditional statement,
+which identifies the basic case. However, this is not always the case. Invoking a recursive
 function consists of successively solving simpler sub-problems until the simplest
 case of all is reached, for which the result is immediate. This way, the most common
 pattern to write a recursive function is:
@@ -175,8 +176,8 @@ Given this pattern, the most common errors associated with recursive functions a
 @item{Not properly using the result of the recursion to produce the originally intended result.}
 ]
 
-Note that a recursive function that works perfectly for the cases for
-which it was created can be completely wrong for other cases. The
+Note that a recursive function that works perfectly with the cases for
+which it was created, can be completely wrong for other cases. The
 @fn[factorial] function is an example: when the argument is negative,
 the problem's complexity increases and becomes further away from the basic
 case:
@@ -191,8 +192,8 @@ case:
 ...
 ]
 
-The most frequent error in a recursive function is when it never stops,
-either because the basic case in not correctly detected or, because the
+The most frequent error in a recursive function occurs when it never stops,
+either because the basic case in not correctly detected, or because the
 recursion does not decrease the problem's complexity. In this case, the
 number of recursive calls grows indefinitely until the computer's memory
 is exhausted. At this point, the program generates an error message. In
@@ -208,7 +209,7 @@ ERROR
 
 It is very important to correctly understand the concept of recursion.
 Although, at first, it may be difficult to embrace fully its
-implications, recursion allows solving with great simplicity,
+implications, recursion allows us to achieve simple solutions to
 apparently very complex problems.
 
 @questions[
@@ -245,11 +246,11 @@ What is the value of:
 
 @section{Recursion in Architecture}
 
-As we will see, in architecture recursion is also a fundamental
-concept. As an example, let us consider a ladder profile, as outlined
-in @figref{fig:esquemaEscada} and let us imagine that we intend
+As we will see, recursion is also a fundamental concept in
+architecture. As an example, let us consider a ladder profile, as outlined
+in @figref{fig:esquemaEscada}, and let us imagine that we intend
 to define a function called @fn[ladder] that, given the point @${P},
-the length @${c} of the thread and the @${e} height of each riser,
+the length @${c} of the thread, the @${e} height of each riser,
 and finally the number of steps @${n}, creates the stairs with the
 first riser starting at @${P}. Given these parameters, the
 definition of the function should start as:
@@ -267,7 +268,7 @@ definition of the function should start as:
 }
 
 To implement this function we have to be able to decompose the problem
-in less complex sub problems and this is where recursion provides a
+in less complex sub problems, and this is where recursion provides a
 great help: it allows us to decompose the drawing of a ladder with
 @${n} steps into the drawing of a step followed by the drawing of a
 ladder with @${n-1} steps, as presented in the diagram of
@@ -299,11 +300,11 @@ for the thread and riser:
 ]
 
 The problem now is that the @fn[ladder] function needs to stop creating
-steps at some point. It is easy that when successively reducing
-the number of steps, that moment comes when we reach a point where that
-number is zero. Thus, when asked to draw a ladder with zero
-steps, the @fn[ladder] function no longer needs to do
-anything. This means that the function should have the following form:
+steps at some point. It is easy to see that, when successively reducing
+the number of steps, we should stop when that number is zero. Thus,
+when asked to draw a ladder with zero steps, the @fn[ladder] function no
+longer needs to do anything. This means that the function should have the
+following form:
 
 @lispcode[
 (define (ladder p c e n)
@@ -314,11 +315,11 @@ anything. This means that the function should have the following form:
       (ladder (+xy p c e) c e (- n 1)))))
 ]
 
-What is left to decide is what does the function produces as output
-when it reaches the stopping condition.  As, in this case, what interests
+What is left to be decided is what does the function produces as output
+when it reaches the stopping condition. Since, in this case, what interests
 us is the side effect resulting from invoking the function, it is less
-relevant what it produces as a result so we will stipulate that it will
-produce @lit[#t] to indicate all worked out well:
+relevant what it produces as a result, so we will stipulate that it will
+produce @lit[#t] to show that all worked out well:
 
 @lispcode[
 (define (ladder p c e n)
@@ -329,7 +330,7 @@ produce @lit[#t] to indicate all worked out well:
       (ladder (+xy p c e) c e (- n 1)))))
 ]
 
-To see a more interesting example of recursion in Architecture let us
+To see a more interesting example of recursion in Architecture, let us
 consider the Saqqara Pyramid, illustrated in @figref{fig:saqqara}, built
 by the architect Imhotep in XXVII century b.C.. This step pyramid is
 considered to be the first pyramid in Egypt and the oldest monumental
@@ -348,7 +349,7 @@ stands a pyramid of @${n-1} steps. To complete this definition it
 must be said that when the last mastababa is created, the pyramid of
 @${0} steps at the top is, actually, non-existent.
 
-Thus, considering the illustration in @figref{fig:esquemaSaqqara}, if
+Thus, when looking at the illustration in @figref{fig:esquemaSaqqara}, if
 we consider that the centre of the base of the pyramid is the @${p}
 position and the mastabas are several pyramid frustums, we can write:
 
@@ -377,9 +378,9 @@ An approximate example of the pyramid of Saqqara would then be:
 @questions[
 @question{
 The above definition does not accurately reflect the geometry of the
-step pyramid of Saqqara because it has sloped surfaces between each
-mastaba, as can be seen in the following diagram where we compare the
-sections of the pyramid we defined (left) and to the actual pyramid
+step pyramid of Saqqara, since it has sloped surfaces between each
+mastaba, as can be seen in the following diagram, where we compare the
+sections of the pyramid we defined (left) to the actual pyramid
 of Saqqara (right):
 
 @centered[@tex{
@@ -390,7 +391,7 @@ of Saqqara (right):
 
 Define a more rigorous version of the @fn[step-pyramid] function
 which receives, in addition to the above parameters, the height of
-each slope. Experiment with different parameters for you to produce
+each slope. Experiment with different parameters in order to produce
 a model similar to the following one:
 
 @fig[@autoimage{saqqaraB}]}
@@ -415,7 +416,7 @@ function that, with the parameters @${p}, @${c}, @${e}, @${\Delta_e}
 and @${l}, creates a false arc.}
 
 @question{
-Define the @fn[balanced-circles] function that allows you to create any of the following illustrations:
+Define the @fn[balanced-circles] function that allows the creation of any of the following illustrations:
 
 @def/no-show[
 (define (balanced-circles p r f)
@@ -437,7 +438,7 @@ Define the @fn[balanced-circles] function that allows you to create any of the f
 
 @;centered[@tex{\autodrawing{equilibrioCirculos}}]
 
-Note that the circles have radius that are in a geometrical
+Note that the circles have radiuses that are in a geometrical
 progression ratio of @${f}, with @${0 <f < 1}. That way, each circle
 (except the first one) has a radius that is the product of @${f} by
 the radius of the largest circle in which it stands. The smallest circle
@@ -455,7 +456,7 @@ Consider the drawing of circles as shown in the following image:
 }
 ]
 
-Define a @fn[radial-circles] function that given the coordinates the
+Define a @fn[radial-circles] function that given the coordinates of the
 rotation centre @${p}, the number of circles @${n}, the @${r_0}
 translation radius, the circle radius @${r_1}, the initial angle @${\phi}
 and the angle increment @${\Delta\phi}, draws the circles as shown in
@@ -527,7 +528,7 @@ Their evaluation should generate the following image:
 @section{Debugging Recursive Programs}
 
 We saw in the @ref{sec:Depur} section that errors in a program can be
-classified as syntactic or semantic errors. Syntactical errors occur
+classified as syntactic or semantic errors. Syntactic errors occur
 whenever we write invalid phrases in that language, i.e., phrases that
 do not obey the grammar rules. Semantic errors are more complex
 than the syntactic in that they generally can only be detected
@@ -604,7 +605,7 @@ and the following call:
 120
 }
 
-Note that, in the previous example as a consequence of @stx[trace],
+Note that, in the previous example, as a consequence of @stx[trace],
 the call of the @fn[factorial] function appears aligned to the left
 side. Each recursive call appears slightly to the right, allowing the
 display of the recursion's "depth", i.e., the number of recursive
@@ -633,8 +634,8 @@ Define a @fn[circles] function capable of creating the illustration presented be
 
 @centered[@(show-tikz 0.4 "ultra thick")]
 
-Note that, the circles have radius that are in geometrical progression
-ration of @${\frac{1}{2}}. In other words, the smaller circles
+Note that the circles have radiuses that are in geometrical progression
+ratio of @${\frac{1}{2}}. In other words, the smaller circles
 have half the radius of the adjacent larger circle. The smallest
 circles of all have a radius greater or equal to @${0.1}. The function should
 only have as parameters the centre and radius of the larger circle.
@@ -642,7 +643,7 @@ only have as parameters the centre and radius of the larger circle.
 
 @question{
 Define the @fn[saw] function that, given a point @${P}, a number of
-teeth, the length @${c} of each tooth and the height @${a} of each
+teeth, the length @${c} of each tooth, and the height @${a} of each
 tooth, draws a saw, with the first tooth starting at @${P} as presented
 in the following image:
 
@@ -679,7 +680,7 @@ Define the @fn[lozenges] function capable of creating the illustration presented
 @;centered[@tex{\autodrawing[0.4]{losangos}}]
 
 Note that the dimensions of the lozenges have a geometrical progression
-ration of @${\frac{1}{2}}. In other words, the smaller lozenges have half
+ratio of @${\frac{1}{2}}. In other words, the smaller lozenges have half
 the size of the largest lozenges at the tips of which they are centred.
 The smallest lozenges have a width greater or equal to @${1}. This function
 should only have as parameters the centre and width of the largest lozenge.
@@ -695,7 +696,7 @@ Consider the stair outlined in the figure below, designed to overcome an slope @
 }]
 
 Define the @fn[stair-slope] function that receives the point @${p},
-the angle @${\alpha}, the length @${c} and the number of steps @${n}
+the angle @${\alpha}, the length @${c}, and the number of steps @${n},
 and builds the ladder described in the previous schema.
 }
 
@@ -707,11 +708,11 @@ Consider the ladder outlined in the figure below, designed to overcome a slope @
       \inputtikz{escadaProgressaoGeometrica}
     \end{tikzpicture}}]
 
-Note that the steps' dimensions have a geometric progression ration of
+Note that the steps' dimensions have a geometric progression ratio of
 @${f}, i.e., given a step with a length of @${c}, the step immediately
 above has a length of @${f \cdot c}. Define the @fn[geometric-progression-ladder]
 function that receives the point @${P}, the angle @${\alpha}, the length @${c}, the
-number of steps @${n} and the ration @${f} and creates the ladder described
+number of steps @${n}, and the ratio @${f}, and creates the ladder described
 in the previous schema.
 }
 ]
