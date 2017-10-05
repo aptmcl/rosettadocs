@@ -150,22 +150,22 @@ For a computer to be able to solve a problem it is necessary to
 describe the process of solving a problem in a language that it
 understands. Unfortunately, the language that a computer "innately" understands
 is extremely poor, making the description of how to solve a non-trivial
-problem a very exhausting, tedious and complex one. The countless programming
-languages that have been invented aim at lighting the programmer's burden, by introducing 
-linguistic elements capable of simplifying those descriptions. For example the
-concept of @emph{function}, @emph{sum}, @emph{matrix} or
-@emph{rational number} do not exist natively in computers but many programming
-languages allow their usage in order to simplify the description of scientific calculus.
+problem a very exhausting, tedious and complex task. By introducing linguistic 
+elements capable of simplifying those descriptions, countless programming 
+languages have managed to reduce the programmer's effort. For example, the
+concept of @emph{function}, @emph{sum}, @emph{matrix} or @emph{rational number} 
+do not exist natively in computers but many programming languages allow their 
+usage in order to simplify the description of scientific calculus.
 Naturally, there must be a process that is able to transform the programmer's
-descriptions into instructions that computers can understand. Although this process
-is relatively complex what matters is that it allows us to have programming languages that
+descriptions into instructions that computers can understand. In spite of being 
+relatively complex, this process allows us to have programming languages that
 operate closer to human thinking process rather than the computer's.
 
 This last fact is of extreme importance because it allows us to use programming
 languages not only to instruct a computer on how to solve a problem, but also
-to explain that process accurately to another human being. This way,
-programming languages become a way of transmitting knowledge as
-mathematics has been for the last thousands of years.
+to accurately explain that process to another human being. Hence, 
+just as mathematics has been for the last thousands of years, programming 
+languages become a way of transmitting knowledge.
 
 There is a huge amount of programming languages, some better equipped 
 than others to solve specific problems. The choice of a programming language should
@@ -181,7 +181,7 @@ problems. There are many languages that serve this purpose,
 most commonly associated with computed aided design tools - @emph{Computer Aided
 Design} (CAD). ArchiCAD, for instance, offers a programming language
 called GDL, an acronym for @emph{Geometric Description Language} that enables users
-to program multiple geometric forms. In the case of AutoCAD that language used is called
+to program multiple geometric forms. In the case of AutoCAD, it uses a language called
 AutoLisp, a dialect of a famous programming language called Lisp. A third
 option will be the RhinoScript language, available for
 Rhinoceros. Despite these languages seeming very different from each
@@ -192,11 +192,11 @@ to particularize them in a single language.
 Unfortunately GDL, AutoLisp, and RhinoScript were developed a long
 time ago and they have not been updated, possessing many archaic
 characteristics that makes them harder to learn and use. In order to
-make the learning process easier and, simultaneously allowing our programs
+ease the learning process and simultaneously allow our programs
 to run in different CAD environments, we are going to use a new
-language called Racket, that has was purposely adapted for programming in
-Architecture. In this text we will explain the fundamentals of programming using Racket,
-not just because its easier to learn, but also for it's practical applicability.
+language called Racket, that has been intentionally adapted for programming in
+Architecture. In this text, we will explain the fundamentals of programming using Racket,
+not only because it's easier to learn, but also for it's practical applicability.
 However, once learned, the reader should be able to apply these fundamentals
 to any other programming language.
 
@@ -217,8 +217,8 @@ Exponentiation @${b^n}is an operation between two numbers @${b} and
 
 To a reader not familiarized with exponentiation, the previous
 definition raises several questions that may not be evident: how many multiplications should actually
-be done?,@${n}?, @${n-1}? What if @${b=1}? or @${b=0}?  Propose a
-definition for the exponentiation function in order to clear any
+be done?,@${n}?, @${n-1}? What if @${b=1}? or @${b=0}?  Suggest a
+definition for the exponentiation function in order to clear up any
 doubts.}
 
 @question{What is a program and what purpose does it serve?}
@@ -233,22 +233,22 @@ this text. But first, we are going to examine some aspects that are common to ot
 
 @subsection{Syntax, Semantics and Pragmatics}
 
-Every language has @emph{syntax}, @emph{semantics}, and
+Every language has @emph{syntax}, @emph{semantics} and
 @emph{pragmatics}.
 
 In simple terms, syntax is a set of rules that dictate
 the kind of sentence that can be written in that language. Without it, any
 concatenation of words could be a sentence. For example, given the words
 “John”, “cake”, “ate”, “the” the syntax rules of the English language tell
-us that - “John ate the cake” is a correct sentence, and that - “ate the Jonh
+us that - “John ate the cake” is a correct sentence, and that - “ate the John
 cake” is not. Note that according to the English syntax, "The cake ate John"
 is also syntactically correct.
 
 Syntax dictates how a sentence is constructed but says nothing in regards
-to its meaning. Semantics are what attributes meaning to a sentence, thus
+to its meaning. Semantics associate meaning to a sentence, thus
 telling us that “The cake ate John” makes no sense.
 
-Finally, pragmatics sets the way sentences are commonly expressed. In
+Finally, pragmatics set the way sentences are commonly expressed. In
 a language, pragmatic changes depending on the context: the way two close
 friends talk with each other is different from the way two strangers talk.
 
@@ -259,30 +259,30 @@ being @emph{formal}, obeying a set of simple and restrictive rules
 that can be @emph{mechanically} processed.
 
 In this document we will describe Racket's syntax and semantics and, although
-there are mathematical formalisms to describe rigorously those two aspects, they
+there are mathematical formalisms to describe rigorously these two aspects, they
 require a mathematical sophistication that, given the nature of this work, is
-inappropriate. So we will only use informal descriptions.  Afterwards, as we
-introduce language elements, we will discuss language pragmatics'.
+inappropriate and hence we will only use informal descriptions.  Afterwards, as we
+introduce language elements, we will discuss language pragmatics.
 
 @subsection{Syntax and Semantics of Racket}
 
 When compared to other programming languages, Racket's syntax is
 extraordinary simple and is based on the concept of @emph{expressions}.
 
-An expression in Racket can be formed using primitive elements such as numbers;
-or by the combination of those elements such as the sum of two numbers.
+In Racket, an expression can be formed either by primitive elements such as numbers,
+or by the combination of those elements, such as the sum of two numbers.
 This simple definition allows us to build expressions of arbitrary complexity.
 However, it is important to remember that syntax restricts what can be written:
-the fact that we can combine expressions to create more complex ones, that does
-not mean we can write @emph{any} combination of sub-expressions. These combinations
+the fact that we can combine expressions to create more complex ones, does
+not mean that we can write @emph{any} combination of sub-expressions. These combinations
 are restricted by syntactic rules that we will describe throughout this text.
 
 Much like the syntax, Racket's semantics is also very simple when compared to other
 programming languages. As we will see, semantics is determined by the @emph{operators}
-that are used in our expressions. For instance, the sum operator, is used to add two
+that are used in our expressions. For instance, the sum operator is used to add two
 numbers. An expression that combines this operator with, for example, the numbers @${3} and
 @${4} will have as its meaning the sum between @${3} and @${4}, i.e., @${7}.
-In a programming language, the semantics' of an expression is given by the computer that
+In a programming language, the semantics of an expression is given by the computer that
 will @emph{evaluate} the expression.
 
 @subsection{The Evaluator}
@@ -291,33 +291,34 @@ Every expression in Racket has a value. This concept is so important
 that Racket provides an evaluator, i.e., a program designed to interact
 with the user in order to evaluate expressions defined by the user.
 
-In Racket, the evaluator is shown as soon as we start working the DrRacket
+In Racket, the evaluator is shown as soon as we start working with the DrRacket
 environment, and it is possible to easily change between the editor and the
 evaluator at any time. Once DrRacket is running, the user is presented with
 the character @verb{>} (called @emph{prompt}), meaning that Racket is waiting for
 the user to input an expression.
 
-The character ">" is Racket's "prompt", in front of which the user's expressions
-will be shown. Racket interacts with the user by executing a cycle that reads an
+User's expressions will be shown in front of Racket's "prompt" character ">". 
+Racket interacts with the user by executing a cycle that reads 
 expressions, determines its value and writes the result. This cycle is
 traditionally called @emph{read-eval-print-loop} (abbreviated to REPL).
 
 During the read phase, Racket reads an expression and creates an internal object
 that represents it. In the evaluation phase, that object is analysed in order to
 produce a value. This analysis uses rules that dictate, for each case, the object's
-value. Finally, the result is given back in text form to the user in the print phase.
+value. Finally, at the print phase, the result is returned to the user in text 
+format.
 
-Given the existence of the @emph{read-eval-print-loop} process, in Racket it is not
-necessary to instruct that computer to explicitly print the result of an expression,
-meaning that testing and debugging is significantly easy. The advantage of Racket being
+Given the existence of the @emph{read-eval-print-loop} process in Racket, it is not
+necessary to instruct the computer to explicitly print the result of an expression,
+which means that testing and debugging is significantly easy. The advantage of Racket being
 an interactive language is that it allows programs to be quickly developed by writing,
 testing and correcting small fragments at a time.
 
 @section{Language Elements}
 
 In every programming language we have to deal with two sets of objects: data and
-procedures. Data comprise all the entities that we wish to  manipulate. Procedures
-designate the rules on how to manipulate that data.
+procedures. Data comprise all the entities that we wish to manipulate. Procedures
+designate the rules that specify how to manipulate that data.
 
 In Mathematics, we can look at numbers as the data and algebraic operations as the
 procedures. These operations allows us to @emph{combine} numbers. For example,
@@ -325,17 +326,17 @@ procedures. These operations allows us to @emph{combine} numbers. For example,
 @${2\times 2\times 2}, and using even more data @${2\times 2\times 2\times 2}.
 However, unless we want to spend time solving problems of elementary arithmetic, we
 should consider more elaborate operations that represent calculation patterns. In the
-previous sequence of combinations shown, it is clear that the pattern that is emerging
+sequence of combinations previously shown, it is clear that the pattern that is emerging
 is the definition of exponentiation, which has been defined in Mathematics a long time
-ago. Exponentiation is therefore an abstraction of a succession of multiplications.
+ago. Therefore, exponentiation is an abstraction of a succession of multiplications.
 
 As in Mathematics, a programming language should contain primitive data and procedures,
 it should be capable of combining data and procedures to create more complex data and
 procedures and it should be able to abstract calculation patterns and allow them to be
 used as simple operations, defining new operations that represent those patterns.
 
-Further ahead we are going to see how it is possible to define these abstractions in Racket.
-But for now, let us take a closer look at the @emph{primitive elements} of the language, i.e.,
+Further ahead, we are going to see how it is possible to define these abstractions in Racket. 
+For the time being, let us take a closer look at the @emph{primitive elements} of the language, i.e.,
 the most simple entities that the language deals with.
 
 @subsection{Numbers}
