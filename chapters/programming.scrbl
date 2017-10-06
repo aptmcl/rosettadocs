@@ -341,79 +341,78 @@ the most simple entities that the language deals with.
 
 @subsection{Numbers}
 
-As said previously, Racket executes a @emph{read-eval-print} cycle. This implies that
+As previously said, Racket executes a @emph{read-eval-print} cycle. This implies that
 everything we write in Racket must be evaluated, i.e., everything must have a value that Racket
 displays on the @emph{screen}.
 
-That way, if we give the evaluator a number it will return the value of that number. How much is the
-value of a number? At best we can say it has its own value. For example, the value of 1 is 1.
+That way, if we give the evaluator a number, it will return that number's value. How much is the
+value of a number? At best we can say that the number has its own value. For example, the value of number 1 is 1.
 
 @incremental[1 12345 1/2 1+2i 4.5]
 
 In Racket, numbers can be @emph{exact} or @emph{inexact}. Exact numbers include integers,
-fractions and complex numbers with integer parts. Inexact numbers are all others, being typically
-written in decimal or scientific notation).
+fractions and complex numbers with integer parts. Inexact numbers are all others, which are typically
+written in decimal or scientific notation.
 
 @section{Combinations}
 
 A combination is an expression that describes the application of an operator to its operands. In
-Mathematics, numbers can be combined using operations like the sum or multiplication; e.g. @${1 + 2}
-and @${1 + 2 \times 3}. The sum and multiplication of numbers are but two of the extremely primitive
+Mathematics, numbers can be combined using operations like sum or multiplication; e.g. @${1 + 2}
+and @${1 + 2 \times 3}. Sum and multiplication of numbers are simply two of the primitive
 procedures provided by Racket.
 
 In Racket, a combination can be created by writing a sequence of expressions inside a pair of
 parentheses. An expression is a primitive element or another combination. The expression
 @lisp[(+ 1 2)] is a combination of two primitive elements @lisp[1] and @lisp[2] through the primitive
 procedure @fn[+]. In the case of @lisp[(+ 1 (* 2 3))] the combination is between @${1} and @lisp[(* 2 3)]
-(this last expression is also a combination). Note that each expression must be separated from the
+(where @lisp[(* 2 3)] is also a combination). Note that each expression must be separated from the
 rest using at least one space. Despite the combination @lisp[(* 2 3)] having three expressions - @fn[*],
 @lisp[2] and @lisp[3], the combination @lisp[(*2 3)] only has two - @lisp[*2] and @lisp[3], in which the
-first expression  has no predefined meaning.
+first expression (@lisp[*2]) has no predefined meaning.
 
-For now, the only useful combinations are those in which expressions have meaning as operators and operands.
-Conventionally, Racket considers the first element of the combination the operator and the rest its
+For now, the only useful combinations are those whose expressions have meaning as operators and operands.
+Conventionally, Racket considers the first element of the combination as the operator and the rest its
 operands.
 
-The notation Racket uses to build expressions (the operator first and then the operands) is called prefix
-notation. This form of notation can cause some perplexity to new users of this language since most of them
+The notation used by Racket to build expressions (the operator before the operands) is called prefix
+notation. This form of notation may cause some perplexity to new users of this language since most of them
 expect a notation closer to that taught in arithmetic and which is usually used in other programming languages. 
-The expression @lisp[(+ 1 (* 2 3))] is normally written @pascal{1 + 2 * 3} (designated infix notation,
-operator @emph{between} operands), and usually this is easier for a human being to read. However, the prefix
-notation used by Racket has advantages over the infix notation:
+The expression @lisp[(+ 1 (* 2 3))] is normally written as @pascal{1 + 2 * 3} (designated infix notation). 
+Although the infix notation (whose operator is placed between operands) is usually easier to read by a human, the prefix
+notation used by Racket has advantages over the former, such as:
 
 @itemlist[ 
 
 @item{It is very easy to use @emph{variadic} operators, that is, operators
-that have an variable number of operands, such as @lisp[(+ 1 2 3)] or
-@lisp[(+ 1 2 3 4 5 6 7 8 9)]. Most of other programming languages use
-only unary or binary operators and it is necessary to write the binary
-operators between each two operands: @pascal{1 + 2 + 3} or @pascal{1 +
-2 + 3 + 4 + 5 + 6 + 7 + 8 + 9}. If it is intended to apply a ternary
-operator, you cannot write it the same way.}
+that have a variable number of operands, such as @lisp[(+ 1 2 3)] or
+@lisp[(+ 1 2 3 4 5 6 7 8 9)]. Most programming languages use only
+unary or binary operators. In such languages, binary operators must be written
+between each two operands, e.g.: @pascal{1 + 2 + 3} or @pascal{1 +
+2 + 3 + 4 + 5 + 6 + 7 + 8 + 9}. Note that if you intend to apply a ternary operator, 
+you can't write it the same way as the unary or binary operator.}
 
 @item{There are no precedences between operators. In languages that
-make use of infix notation, the expression @pascal{1 + 2 * 3}, must be
-calculated as if it was written @pascal{1 + (2 * 3)} instead of
-@pascal{(1 + 2) * 3}, because precedences were created in order to
-remove ambiguities. These precedences can be altered by parentheses
-use. In Racket, expressions like @lisp[(+ 1 (* 2 3))] or @lisp[(* (+ 1
-2) 3)] would be necessarily different, which avoids any kind of
-ambiguity.}
+use infix notation, expressions like @pascal{1 + 2 * 3}, must be disambiguated 
+through precedence rules. These precedence rules  can be modified by parenthesis. 
+Thus, the former expression @pascal{1 + 2 * 3} should be calculated as if it was 
+written @pascal{1 + (2 * 3)} instead of @pascal{(1 + 2) * 3}.  In Racket, expressions 
+like @lisp[(+ 1 (* 2 3))] or @lisp[(* (+ 1 2) 3)] would be necessarily different, 
+which avoid any kind of ambiguity.}
 
 @item{The operators we define are used exactly the same
-way as the operators provided by the language: operator first and
-then the operands. In most other languages the operators are infix
-(between operands) and the procedures created by the user are prefix
+way as the operators provided by the language: first the operator and
+then the operands. In most other languages, operators are infix
+(between operands) and procedures created by the user are prefix
 (first the procedure's name and then the operands). This compromises
 the extension of the language in a coherent way. To exemplify this last case,
 let's consider the exponentiation operation in a language with infix notation.
 To be coherent with the rest of the language there should be an operator, for
-example @pascal{**}, that lets us write @pascal{3**4} to calculate the 3 to the
-fourth power. As this operator usually does not exist, we are forced to create a
+example @pascal{**}, that lets us write @pascal{3**4} to calculate 3 to the
+fourth power. Since this operator usually does not exist, we are forced to create a
 procedure that implements it, but in this case the syntax changes radically because,
-in general, the user can not  create infix operators. As a consequence, this new
-operand would have to be used in a prefix way and thus not remain coherent the other
-operators of the language, such as the sum or multiplication. On the contrary, in
+in general, the user can not create infix operators. As a consequence, this new
+operand would have to be used in a prefix way and thus not remain coherent with other
+operators of the language, such as sum or multiplication. On the contrary, in
 Racket we can either write @lisp[(* 3 3 3 3)] or create a function that allows us
 to write @lisp[(** 3 4)].}]
 
@@ -425,23 +424,23 @@ to read every operand before we are able to understand what should be done with 
 @subsection{Indentation}
 
 The disadvantage of the prefix notation is the writing of complex combinations. The
-expression @pascal{1+2*3-4/5*6} is easy to read but when written using Racket's syntax,
-@lisp[(- (+ 1 (* 2 3)) (* (/ 4 5) 6))], it has a form that for those not yet accustomed
-to this syntax can be harder to read due to the large number of parentheses.
+expression @pascal{1+2*3-4/5*6} is easy to read but when written using Racket's syntax:
+@lisp[(- (+ 1 (* 2 3)) (* (/ 4 5) 6))], it has a form that, for those not yet accustomed
+to the syntax, might be harder to read due to the large number of parentheses.
 
 To make the expression easier to read, we can (and we should) use
 @emph{indentation}. This technique is based on using different
 alignments in the textual disposition of programs in order to make
 them easier to read. This way, instead of writing our expressions
 in a single line or with an arbitrary line arrangement, we write them
-throughout several lines and with an alignment between lines that
+throughout several lines, while using an alignment between lines that
 shows how the sub-expressions are related to the expression that
 contains them.
 
 The rule for indentation in Racket is extremely simple: in one line we
 have the operator and the first operand, the remaining operands are placed
-immediately below the first on, with enough blank spaces on the left so they
-are correctly aligned. If the case of a short expression, we can write it
+immediately below the first with enough blank spaces on the left so that they
+are correctly aligned. In the case of a short expression, we can write it
 in a single line, with the operands immediately after the operator, using a
 single blank space to separate them. Using these two rules, we can rewrite the
 previous expression in the following manner:
@@ -465,7 +464,7 @@ Note that arranging a combination in several lines does not affect the way Racke
 The correct delimitation of elements in a combination is done only by the visual separation
 and the correct usage of stacked parenthesis.
 
-When the indentation rule is not enough to produce an aesthetically pleasing disposition of text lines,
+When the indentation rule is not enough to produce an aesthetically pleasing disposition of textual lines,
 some minor variations may be used, such as placing the operator in a line and the operands underneath it,
 like in the following example:
 
@@ -496,17 +495,17 @@ Generally, we might need to apply several rules simultaneously:
              (and-the-last-one 9 10))
 \end{lispcode}}
 
-Some operators have a proper indentation rule but this will be explained as we introduce them. 
+Some operators have a specific indentation rule but this will be explained as we introduce them. 
 
 Indentation is crucial in Racket because it makes it easier to write and read complex code.
 Most editors that recognize Racket's language automatically format the programs as we write them, 
 also showing the correct matching between parenthesis. Eventually with practice, it becomes
-every easy to write and read programs, regardless how complex their structure is.
+easier to write and read programs, regardless of how complex their structure is.
 
 @questions[
 @question{Define REPL?}
-@question{What is the difference between prefix an infix notation?}
-@question{In Mathematics it is usual to use simultaneously the prefix, infix and postfix notations. Write some mathematical examples of expressions that make use of those different notations.}
+@question{What is the difference between prefix and infix notations?}
+@question{In Mathematics it is usual to use simultaneously the prefix, infix and postfix notations. Write some mathematical examples of expressions that make use of these different notations.}
 @question{Convert the following arithmetic infix expressions to Racket's prefix notation:
 @itemlist[#:style 'ordered 
 @item{@${1 + 2 - 3}}
@@ -537,11 +536,11 @@ every easy to write and read programs, regardless how complex their structure is
 
 @subsection{Evaluating Combinations}
 
-As we have seen, Racket considers the first element of a combination its operator and
-the rest the operands.
+As we have seen, Racket considers the first element of a combination as the operator and
+the rest as operands.
 
 The evaluator determines the combination's value by applying the procedure specified by the user
-to the value of the operands. The value of an operand is designated as the argument of the
+to the value of the operands. The value of an operand is called the argument of the
 procedure. The value of the combination @lisp[(+ 1 (* 2 3))] is the result of adding the value of 1 to
 @lisp[(* 2 3)]. As we have already seen, the value of @lisp[1] is @${1} and @lisp[(* 2 3)] is a
 combination whose value is the result of multiplying @lisp[2] by @lisp[3], which is @${6}.
