@@ -561,16 +561,16 @@ Finally, by summing @${1} with @${6} we get @${7}.
 
 @subsection{Strings}
 
-@emph{Chains of characters} (also called @emph{Strings}) are another type of primitive data. A character is a
+@emph{Chains of characters} (also called @emph{Strings}) are other type of primitive data. A character is a
 letter, a digit or any kind of graphic symbols, including non-visible graphic symbols like blank
 spaces, tabs and others. A string is specified by a character sequence between quotations marks. Just
 like with numbers, the value of a string is the string itself:
 
 @incremental["Hi" "I am my own value"]
 
-Since a @emph{string} is delimited by quotation marks, one could ask how can we create a string that
-contains quotation marks. For this and other special characters, there is a special character that Racket
-interprets differently: when in a strings the character @verb{\} appears it tells Racket that the next characters
+Since a @emph{string} is delimited by quotation marks, one could ask: "How can we create a string that
+contains quotation marks?" For this and other special characters, there is a special character that Racket
+interprets differently: when the character @verb{\} appears in a string, it tells Racket that the next characters
 must be evaluated in a special way. For example, to create the following @emph{string}:
 
 @quote{
@@ -595,10 +595,10 @@ We must write:
 ]
 
 The character @verb{\} is called an @emph{escape} character and allows the inclusion of characters
-in strings that would otherwise be difficult to input. @tabref{tab:caracteresEscape}) shows examples
-of other @emph{escape} characters.
+in strings that would otherwise be difficult to input (@tabref{tab:caracteresEscape} shows examples
+of other @emph{escape} characters).
 
-As it happens with numbers, there are countless operators to
+Just like with the numbers, there are countless operators to
 manipulate @emph{strings}. For example, to concatenate multiple
 @emph{strings} there is the @lisp[string-append] operator. The
 concatenation of several strings produces a single string with
@@ -611,7 +611,7 @@ all characters of those strings, in the same order:
 (string-append "And I" " am " "another")
 ]
 
-To know how many characters there are in a string we have the @lisp[string-length] operator:
+To know how many characters there are in a string there is the @lisp[string-length] operator:
 
 @incremental[
 (string-length "I am string")
@@ -620,7 +620,7 @@ To know how many characters there are in a string we have the @lisp[string-lengt
 
 Note that quotation marks define strings' boundaries and are not
 consider characters.  Besides @emph{strings} and numbers, Racket has
-other kinds of primitive elements that will be addressed later.
+other primitive data that will be addressed later.
 
 @section[#:tag "sec:syntaxDefine"]{Defining Functions}
 
@@ -628,37 +628,35 @@ In addition to basic arithmetic operations, Mathematics offers a large
 set of operations that are defined based on those basic ones. For
 example, the @emph{square} of a number is an operation (also
 designated as a @emph{function}) that, given a number, calculates 
-the multiplication of that number by itself. This function has the following
-mathematical definition @${x^2 = x \cdot x}.
+the multiplication of that number by itself. This function's 
+mathematical definition is @${x^2 = x \cdot x}.
 
 Like in Mathematics, it is possible to define the square function in a programming
 language. In Racket, to obtain the square of a number, for example @lisp[5], we
-write the combination @lisp[(* 5 5)]. In general, given a number @lispf{x}, we know
-to obtain the square value by writing @lispf{(* x x)} combination. All that remains now
-is to associate a name indicating that, given a number @lispf{x}, we
-obtain its square by evaluating @lispf{(* x x)}. Racket allows us to do that by
-using the @stx[define] operation:
+write the combination @lisp[(* 5 5)]. In general, given a number @lispf{x}, we 
+obtain the square value of that number by writing the combination @lispf{(* x x)}. In order 
+to complete the function definition, we must associate a name that indicates that, given a 
+number x, we will obtain its square by evaluating @lispf{(* x x)}. Racket allows us to do 
+that by using the @stx[define] operation:
 
 @def[
 (define (square x) (* x x))
 ]
 
-As you can see from the @lisp[square] function definition, in order to
-define a function in Racket, we need to combine three elements. The
-first element is the word @stx[define], that informs the evaluator that
-we are defining a function. The second element is a combination
+As you can see from the @lisp[square] function definition above, we need to combine three elements
+in order to define a function in Racket. The first element is the word @stx[define], that informs 
+the evaluator that we are defining a function. The second element is a combination
 with the function's name and its parameters. The third element is the
-expression that will compute the function value for those
-parameters. In generic terms we could say that the definition of
-functions is done in the following manner:
+expression that will compute the function's value for the specified parameters. 
+In generic terms, we could say that the definition of functions is done as follows:
 
 @lispcode[
 (define (_name #,(lispemphi parameter "1") ... #,(lispemphi parameter "n"))
   _body)]
 
 The function's parameters are called @emph{formal parameters} and they
-are used in the body of an expression to refer to the correspondent
-arguments. When we write in the evaluator @lisp[(square 5)], the
+are used in the body of a function to refer to the correspondent
+arguments. When we write @lisp[(square 5)] in the evaluator, the
 number @lisp[5] is the formal parameter. During the calculation this argument
 is associated with the number @lispf{x}. The arguments of a function are also
 called @emph{actual parameters}.
@@ -666,7 +664,7 @@ called @emph{actual parameters}.
 The definition of the @lisp[square] function declares that in order to determine the
 square of a number @lispf{x}, we should multiply that number by itself @lispf{(* x x)}.
 This definition associates the word @emph{square} with a procedure, i.e., a description on
-how to obtain the desired result. Note that this procedure has parameters allowing it
+how to obtain the desired result. Note that this procedure has parameters, hence allowing it
 to use different arguments. For example, let's evaluate the following expressions:
 
 @incremental[
@@ -674,18 +672,18 @@ to use different arguments. For example, let's evaluate the following expression
 (square 6)
 ]
 
-The rule to evaluate combinations stated above is also valid for functions defined by the
-user. The evaluation of the expression @lisp[(square (+ 1 2))] first evaluates @lisp[(+ 1 2)]
-operand. This value of this operand, @${3}, is used by the function in place of @lisp[x].
+The rule to evaluate the combinations stated above is also valid for functions defined by the
+user. The evaluation of the expression @lisp[(square (+ 1 2))] first evaluates the operand @lisp[(+ 1 2)],
+then that value (in this case @${3}) is used by the function in place of @lisp[x].
 The function's body is then evaluated and all occurrences of @lisp[x] will be replaced by the value
-@lisp[3], i.e., the final value will b e the combination @lisp[(* 3 3 )].
+@lisp[3], which means that the body's final value will be the combination @lisp[(* 3 3 )].
 
-Formally, in order to invoke a function, is necessary to construct a combination in which the first
+Formally, in order to invoke a function, it is necessary to construct a combination in which the first
 element is an expression that evaluates for the function itself, and the remaining elements are
-expressions that evaluate for the arguments that the function is supposed to use. The result of the
+expressions that are evaluated for the arguments that the function is supposed to use. The result of the
 combination's evaluation is the value calculated by the function for those arguments.
 
-The process of evaluating a combination is done by the following steps:
+The process of evaluating the combination of a function invocation is done by the following steps:
 
 @itemlist[#:style 'ordered
 @item{All elements in a combination are evaluated, with the value of the first one being
@@ -709,8 +707,8 @@ following example shows the process of evaluating the expression @${((1+2)^2)^2}
 81
 ]
 
-Every function created by the user is evaluated by Racket in equal terms as other 
-predefined function. This allows them to be used to create new functions. For example, 
+Racket evaluates every function created by users the same way it evaluates other predefined functions.
+This allows them to be used to create new functions. For example, 
 after defining the @fn[square] function, we can define the function that calculates the
 area of a circle with radius @${r}, using the formula @${\pi * r^2}:
 
@@ -731,15 +729,15 @@ the @fn[square] function will be invoked. This is visible in the following evalu
 12.5664
 ]
 
-Since defining functions allows for associations to be established between a procedure
-and a name, that means Racket needs to have memory in which to store those associations.
+Since defining functions allows associations between a procedure and a name to be established, 
+that means Racket needs to have memory in which to store those associations.
 This memory is called @emph{environment}.
 
-Note that this environment exists only while we are working. When the program is shut down,
-that environment is lost. In order to avoid losing those definitions, they should be saved as
-in a file. This is the reason why the process of working in Racket is based on writing the definitions
-in files although still needing to test them using the evaluator to ensure the proper behaviour
-of the created definitions.
+Note that this environment only exists while we are working. When the program is shut down,
+that environment is lost. Definitions should be written and saved in files in order to avoid losing them. 
+This is the reason why the process of working in Racket is based on writing definitions
+in files, although they still need to be tested using the evaluator to ensure that created 
+definitions behave properly. 
 
 @questions[
 @question{Define the function @fn[double], that calculates the double of a given number.}
@@ -750,20 +748,21 @@ of the created definitions.
 The definition of functions in Racket involves assigning names: names for functions and names
 for its parameters.
 
-Racket presents almost no limit towards names that you can give. A name like @fn[square] is as valid as
+Racket has almost no limits towards the names you can assign. A name like @fn[square] is as valid as
 @fn[x+y+z] because what separates a name from the other elements of a combination are parentheses and blank
-spaces. @margin-note{The blank space concept includes tabs and changing line.}
+spaces. @margin-note{The blank space concept includes tabs and line breaks.}
 
-In Racket the only characters that cannot be used in names are the parentheses @tt{(}, apostrophe
-@tt{'}, quotation marks @tt{"} and semicolons @tt{;}. All other characters can be used in names,
-but, in practice, the creation of names should take some rules in consideration:
+In Racket the only characters that cannot be used in names are parentheses @tt{(}, apostrophe
+@tt{'}, quotation marks @tt{"} and semicolons @tt{;}. Though all other characters can be used in names,
+in practice, when creating names one should take some rules into consideration:
 
 @itemlist[
 @item{You should only use letters of the alphabet, digits, arithmetic symbols and some punctuation characters like
 exclamation and interrogation marks. For portability reasons, accented characters should be avoided.}
 @item{If the function's name has more than one word, those words should be separated by an hyphen @lisp[-].
-For example, a function that computes the are of a circle can have the name @fn[circle-area]. However, @fn[circlearea],
-@verb{circle_area} and @fn[circle+area] are less appropriate.}
+For example, a function that computes the area of a circle can have the name @fn[circle-area], @fn[circlearea],
+@verb{circle_area} and @fn[circle+area]. However, @fn[circlearea], @verb{circle_area} and @fn[circle+area] are 
+less appropriate.}
 @item{If the name is associated with a question it should end with an interrogation mark - @lisp[?]. For
 example, a function that tests if a number is even could be called @fn[even?].}
 @item{If the function makes a conversion between two types of values, the name could include the name of both
@@ -771,7 +770,7 @@ types and an arrow between them, indicating the direction of the conversion. For
 euros into pounds could be called @fn[euros->pound] or better yet @fn[pound<-euro].}]
 
 The choice of names will have a significant impact on the program's legibility. Let us consider for example
-the area @${A} of a triangle with a base @${b} and a height @${c} which can be defined mathematically by:
+the area @${A} of a triangle with a base @${b} and a height @${c}, which can be mathematically defined by:
 
 @$${A(b,c) = \frac{b \cdot c}{2}} 
 
@@ -781,13 +780,13 @@ In Racket's language we will have:
 (define (A b c) (/ (* b c) 2))
 ]
 
-Note that the Racket definition is identical to the corresponding mathematical expression,
+Note that Racket's definition is identical to the corresponding mathematical expression,
 apart from the prefix notation and the @${=} symbol being @lisp[define]. However, if we did
 not know beforehand what the function does, we will hardly understand it. Therefore, and contrary
 to Mathematics, the names that we assign in Racket should have a clear meaning. Instead of writing
-@lisp{A} it is preferable that we write @lisp{triangle-area} and instead of writing @lisp{b} and
-@lisp{c} we should write @lisp{base} and @lisp{height} respectively. Taking these aspects in
-consideration we can present a more meaningful definition:
+@lisp{A} it is preferable to write @lisp{triangle-area} and instead of writing @lisp{b} and
+@lisp{c} it would be preferable to name them @lisp{base} and @lisp{height} respectively. Taking these aspects in
+consideration we anchieve a more meaningful definition:
 
 
 @def[
@@ -817,7 +816,7 @@ understand the written program, so it is crucial that names are carefully chosen
 @question{Define a function that calculates the volume of a parallelepiped from its length, width and height.
 }
 
-@question{Define a function that calculates the volume of a cylinder a length and radius. The volume corresponds to multiplying the base radius with the cylinder's length.
+@question{Define a function that calculates the volume of a cylinder from its length and radius. The volume corresponds to multiplying the base radius with the cylinder's length.
 }
 
 @question{Define a function @fn[average] that calculates the average value
