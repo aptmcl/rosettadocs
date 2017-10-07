@@ -826,12 +826,12 @@ between two numbers. For example: @lisp[(average 2 3)] @${\rightarrow}
 @section{Predefined Functions}
 
 The possibility of defining new functions is fundamental for increasing the language's
-flexibility and its ability to adapt to the problems we want to solve. The new functions,
-however, must be defined in terms of others that were either defined by the user or, at most,
+flexibility and its ability to adapt to the problems we want to solve. However, these new functions 
+must be defined in terms of others that were either defined by the user or, at most,
 were already pre-defined in the language.
 
-As we will see, Racket has a reasonable set of predefined functions that in most cases they
-are enough for what we want to do, but we should not try to avoid defining new functions
+As we will see, Racket has a reasonable set of predefined functions that, in most cases,
+are enough for what we want to do, nevertheless we should not try to avoid defining new functions
 whenever we deem it necessary.
 
 In @tabref{tab:funcPreDef} we see a set of mathematical functions predefined in Racket.
@@ -839,10 +839,9 @@ Note that, due to syntax limitations (that are also present in other languages),
 that some Racket functions have a notation that is different when compared to the mathematical
 definition. For example, the square root function, @${\sqrt{x}} is written as @lisp[(sqrt x)].
 The name @lisp[sqrt] is a contraction of the words @emph{square root} and similar contractions
-are used for several other functions. The @emph{absolute value} function is written as @${|x|}
-and the exponentiation function @${x^y} as @lisp[(expt _x _y)]. @Tabref{tab:funcEquiv} shows
-some equivalents between the invocations of Rackets functions and the correspondent Mathematics
-invocations.
+are used for several other functions. The @emph{absolute value} @${|x|} is written as @lisp[(abs x)] 
+and the exponentiation function @${x^y} as @lisp[(expt _x _y)]. @Tabref{tab:funcEquiv} presents
+some equivalences between Racket's functions and the correspondent Mathematics invocations.
 
 @table[#:tag "tab:funcPreDef" #:caption @elem{Some math predefined functions in Racket.}
 @tabular[#:style 'boxed
@@ -866,7 +865,7 @@ invocations.
 	       (list @fn[expt] @elem{Two numbers} @elem{The first argument raised to the second one.})
 	       (list @fn[log] @elem{One number} @elem{The logarithmic value of the argument.})
 	       (list @fn[max] @elem{Multiple Numbers} @elem{The highest argument.})
-	       (list @fn[min] @elem{Multiple Numbers} @elem{the lowest argument.})
+	       (list @fn[min] @elem{Multiple Numbers} @elem{The lowest argument.})
 	       (list @fn[remainder] @elem{Two numbers} @elem{With two arguments, the remainder of the division between the first and the second argument.})
 	       (list @fn[floor] @elem{One number} @elem{The argument without the fractional part.}))]
 ]
@@ -919,7 +918,7 @@ invocations.
                   @item{@lisp[(sin (/ (cos (/ (sin (/ pi 3)) 3)) 3))]}]
 }
 
-@question{Define the function @lisp[odd?] that, for a given number evaluates if it is odd,
+@question{Define the function @lisp[odd?] that evaluates if a given number is odd,
 i.e., if the remainder of that number when divided by two is one. In order to do so, you
 can use the predefined function @lisp[remainder]}
 
@@ -935,13 +934,13 @@ with semi-axis @${a}, @${b} and @${c}. That volume can be calculated using the f
 
 We saw previously that Racket is capable of dealing with several types of numbers, from integers to complex
 numbers and also fractions. Some of those numbers like @${\sqrt 2} or @${pi}, do not have a rigorous
-representation based in numerals and for that reason, Racket classifies them as inexact numbers, in
-order to emphasize that they are dealing with an approximated value. When an inexact number is used in an
+representation based in numerals and, for that reason, Racket classifies them as inexact numbers, thus
+ emphasizing that they are dealing with an approximated value. When an inexact number is used in an
 arithmetic operation, the result will also be inexact, so the inexactness is said to be @emph{contagious}.
 
-@emph{Finitude} is another feature of the inexact numbers. Unlike exact numbers that theoretically
+@emph{Finitude} is another feature of the inexact numbers. Unlike exact numbers, that theoretically
 have no limits, inexact numbers cannot surpass a certain limit, above which every number is represented
-by infinity, as you can see by the following example:
+by infinity, as you can see in the example below:
 
 @incremental[
 (expt 10.0 10)
@@ -964,18 +963,18 @@ exact or inexact numbers in Racket:
 
 As we can see, by using inexact numbers we cannot obtain a correct result and the problem
 is caused by the use of round-off errors: 3/4 can't be represented with a finite number of digits. This round-off
-error is then propagated to the remaining operations which will produce a value that, even though not zero, is
-relatively close enough. 
+error is then propagated to the remaining operations which will produce a value that, even though it's not zero, it is
+relatively close. 
 
 @questions[
 @question{Translate the following definition into Racket:
 @$${f(x)=x-0.1\cdot{}(10\cdot{}x-10)}
 }
 
-@question{In Mathematical terms, whatever the argument used in the previous function, the
+@question{In Mathematical terms, regardless of the argument passed to the function in the previous question, the
 result should always be @${1} because
-@$${f(x)=x-0.1\cdot{}(10\cdot{}x-10)=x-(x-1)=1} Using the created
-function calculate the result of the following expressions and explain them:
+@$${f(x)=x-0.1\cdot{}(10\cdot{}x-10)=x-(x-1)=1} Use the created
+function to calculate the result of the following expressions and explain them:
 
 @lispcode[
 (f 5.1)
@@ -991,7 +990,7 @@ function calculate the result of the following expressions and explain them:
 Considering that each step as a tread height @${h} and a width @${d} that obey to the following proportion:
 @$${2h+d=0.64} 
 
-define a function that, from a given height to cover and the number of treads, computes the length of the flight
+define a function that, from a given height and a number of treads, computes the length of the flight
 of stairs.} ]
 
 @section{Name Evaluation}
