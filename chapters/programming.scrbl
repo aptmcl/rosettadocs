@@ -997,16 +997,16 @@ of stairs.} ]
 
 The primitive elements presented so far, such as numbers and strings, evaluate to
 themselves, i.e., the value of an expression composed only by a primitive element
-is the primitive element itself. With names this is no longer true.
+is the primitive element itself. However, this is no longer true with names.
 
-Names have a special meaning in Racket. Note that when we define a
-function, it has a name. And its formal parameters have names as
+Names have a special meaning in Racket. Note that when defining a
+function, we give it a name. Furthermore, its formal parameters are given names as
 well. When a combination is written, the evaluator uses the function
 definition associated with the name that is the first element of the
 combination.  This means that the value of the first element in a
-combination is the associated function.  If we had defined the
-function @lisp[square], as suggested previously in section
-@ref{sec:syntaxDefine}, we could test this behaviour in the following
+combination is the associated function. Suppose we've defined the
+function @lisp[square] as previously suggested in section
+@ref{sec:syntaxDefine}, then we could test this behaviour with the following 
 expressions:
 
 @incremental[
@@ -1015,31 +1015,31 @@ square
 ]
 
 As we can see, the value of the name @lisp[square] is an entity that Racket
-describes using a special notation. This entity is, as shown, a function. The
-same behaviour happens to any other predefined function:
+describes using a special notation - a function. Any other predefined functions
+will behave the same way:
 
 @incremental[+ *]
 
-As we have seen, the sum @fn[+] and multiplication @fn[*] signs are some of the
+As we have seen, the sum @fn[+] and the multiplication @fn[*] signs are some of the
 predefined names of the language. For example, the symbol @lisp[pi] is also predefined and
-associated with an approximated value of @${pi}:
+it is associated with an approximated value of @${pi}:
 
 @incremental[pi]
 
 However, when the body of the expression is evaluated, the value of a name
 assigned to a parameter in a function is the corresponding argument during the
 function call. For example, in the combination @lisp[(square 3)], after the
-evaluator knows that the @fn[square] value is a function by us defined and
-that @lisp[3] has the value @${3}, it evaluates the body of the function but
-associating the name @lisp[x], whenever is necessary, to the same @${3} that
-was previously associated with @lisp[x].
+evaluator knows that the @fn[square] value is a function that we have defined and
+that @lisp[3] has the value @${3}, it evaluates the body of the function 
+associating the name @lisp[x] whenever necessary to the same @${3} that
+was previously associated with @lisp[x] during the function call.
 
 @section{Conditional Expressions}
 
-There are many operations in which the result depends on a test. For
+There are many operations whose result depends on a test. For
 example, the mathematical function @${|x|}, that estimates the absolute
-value of @${x} is equivalent to the inverse of a number if it is negative
-or the number itself otherwise. Using the mathematical notation we have that:
+value of @${x} is equivalent either to the inverse of the number itself if the number is negative, 
+or to the number itself otherwise. Using the mathematical notation we have that:
 
 @$${|x|= 
 \begin{cases}
@@ -1048,8 +1048,8 @@ x, & \text{otherwise.}
 \end{cases}}
 
 This function needs to @emph{test} if the argument is negative and
-choose one of two alternatives: it either evaluates for the number itself
-or for its symmetrical value. 
+choose one of two alternatives: it evaluates either to the number itself
+or ot its symmetrical value. 
 
 These kind of expressions that depend on making one or more tests,
 are called @emph{conditional expressions}.
@@ -1058,48 +1058,47 @@ are called @emph{conditional expressions}.
 
 A conditional expression follows the structure ''if @emph{expression}
 then @ldots, otherwise @ldots''. The @emph{expression} that determines
-whether to use the branch ''if'' or the branch ''otherwise'', is called
-the @emph{logical expression} and is characterized for having its value
+whether to use the ''if'' branch or the ''otherwise'' branch is called
+the @emph{logical expression} and is characterized by having its value
 interpreted as either @emph{true} or @emph{false}. For example, the
 logical expression @lisp[(< x 0)] tests if the value of @lisp[x] is less than
-zero. If it is, the expression's evaluation will return true, otherwise it
-will return false.
+zero. If @lisp[x] is less than zero, then the expression's evaluation returns true,
+ otherwise it will return false.
 
 @subsection{Logical Values}
 
 Some programming languages consider true and false as part of a special data
 type called @emph{logical} or @emph{boolean} data.  @margin-note{After George
 Boole, the English mathematician that invented the algebra of logic.} Other
-languages, like Racket, do not consider that these values should be treated as
-special data, just that the conditional expression considers some of the values
-as true and the remaining ones as false.
+languages, like Racket, do not treat these values as special data. In these languages, 
+the conditional expression considers some of the values as true and the remaining values as false.
 
 In Racket, conditional expressions consider only one of its values as false,
 represented as @lit[#f]. Any other value that is different than @lit[#f] is
 considered to be true. From the conditional expression point of view, the expression
 @${123} is considered to be true. However, it makes little sense to a human user that
-a number is considered as true or false so a constant that represents true
-was introduced the language. This constant is represented by @lit[#t]. If @lit[#f]
-is the only value that represents falsehood and if @lit[#t] is different than @lit[#f]
+a number is considered as true or false, so a constant representing true
+was introduced in the language. This constant is represented by @lit[#t]. If @lit[#f]
+is the only value that represents falsehood and if @lit[#t] is different than @lit[#f],
 then @lit[#t] necessarily represents truth.
 
 @section{Predicates}
 
 In the most usual case, a logical expression is a function applied to some arguments. 
 In this case, the function used as the test case is known as a @emph{predicate}. The
-test value is interpreted as true or false. So the predicate is a function that produces
-only true or false.
+test value is interpreted as true or false. So the predicate is a function that only
+ produces true or false.
 
-Despite the use of @lit[#t] and @lit[#f] it is important to know that not every predicate
-returns @lit[#t] and @lit[#f] exclusively. There are predicates produce different values
+Despite the use of @lit[#t] and @lit[#f], it is important to know that not every predicate
+exclusively returns @lit[#t] and @lit[#f]. There are predicates that produce values different
 from @lit[#t] and @lit[#f].
 
 @subsection{Arithmetic Predicates}
 
 The mathematical @emph{relational operators} @${<},@${>},@${=},@${\leq} and @${\geq}
-are some of the most simple predicates. These operators compare numbers between each other.
-Their use in Racket follows the prefix notation and are written respectively @lisp[<],@lisp[>],@lisp[=],
-@lisp[<=] and @lisp[>=]. Some examples are:
+are some of the most simple predicates. These operators compare numbers with each other.
+In Racket, these operators follow the prefix notation and are written as @lisp[<],@lisp[>],@lisp[=],
+@lisp[<=] and @lisp[>=], respectively. Some examples are:
 
 @incremental[
 (> 4 3)
@@ -1110,14 +1109,14 @@ Their use in Racket follows the prefix notation and are written respectively @li
 @section{Logical Operators}
 
 In order to combine logical expressions together we have the
-@stx[and], @stx[or] and @fn[not] operators. The @stx[and] and the
-@stx[or] operators accept any number of arguments. The @fn[not] only
+@stx[and], @stx[or] and @fn[not] operators. While the @stx[and] and 
+@stx[or] operators accept any number of arguments, @fn[not] only
 accepts one. The value of such combinations is determined according to
 the following rules:
 
 @itemlist[
-          @item{The @stx[and] evaluates arguments from left to right until one of them is false, returning that value. If none of the arguments are false, the @stx[and] operator returns true.}
-          @item{The @stx[or] evaluates arguments from left to right until one of them is true, returning that value. If none of the arguments are true, the @stx[or] operator returns false.}
+          @item{The @stx[and] evaluates arguments from left to right until one of them is false, returning that value. If none of the arguments are false it returns true.}
+          @item{The @stx[or] evaluates arguments from left to right until one of them is true, returning that value. If none of the arguments are true it returns false.}
           @item{The @fn[not] operator evaluates for true, if the argument is false, and evaluates false if the argument is true.}]
 
 Note that although the meaning of false is clear, it necessarily
@@ -1156,36 +1155,36 @@ is equivalent to @lispcode[(and (< #,(lispemphi e "1") #,(lispemphi e "2"))
 
 @section[#:tag "sec:reconhecedores"]{Recognizers}
 
-Apart from relational operators, there are many other predicates in Racket, like @fn[zero?],
-that tests if the number is zero:
+Apart from relational operators, there are many other predicates in Racket, such as @fn[zero?],
+that tests if a number is zero:
 
 @incremental[
 (zero? 1)
 (zero? 0)
 ]
 
-Note that @fn[zero?] ends with an question mark because when a predicate is called,
-a question is being asked. For historical reasons, not all predicates in Racket
+Note that @fn[zero?] ends with a question mark because there's a question being asked when a 
+predicate is called. For historical reasons, not all predicates in Racket
 follow this convention. However, when we define new predicates we should be mindful
 to use them.
 
 Note that the operator @fn[zero?] is used to recognize a particular element (zero) in
 a data type (numbers). These type of predicates are known as @emph{recognizers}. 
 
-Another important set of predicates are the @emph{universal recognizers}. These do not
-recognize one but all elements of a particular type of data. An universal
-recognizer accepts any kind of data as an argument and returns true if that elements
-belongs to the that same kind.
+Other important set of predicates are the @emph{universal recognizers}. These predicates 
+recognize not one, but all elements of a particular type of data. An universal
+recognizer accepts any kind of data as argument and returns true if that element
+belongs to the same kind.
 
-For example, to determine if a certain element is a number, we can use the @fn[number?]
-predicate:
+For example, we can use the @fn[number?] predicate determine if a certain element
+ is a number:
 
 @incremental[
 (number? 1)
 (number? "Two")
 ]
 
-And the @fn[string?] predicate determines if entities are strings:
+And the @fn[string?] predicate to determine if certain entities are strings:
 
 @incremental[
 (string? "Two")
@@ -1204,10 +1203,10 @@ data, like the predicate @fn[integer?] that recognizes integer values:
 ]
 
 
-Note that similar to the number @lisp[1], the number @lisp[1.0] is also
+Note that, similarly to the number @lisp[1], number @lisp[1.0] is also
 an integer. The first is an exact number and the second one is an
-inexact number which implies that operations involving @lisp[1.0] will
-produce inexact results. To distinguish between both types of numbers
+inexact number, which implies that operations involving @lisp[1.0] will
+produce inexact results. To distinguish between both types of numbers,
 we have the predicates @fn[exact?] and the @fn[inexact?]:
 
 @incremental[
@@ -1246,7 +1245,7 @@ we have the predicates @fn[exact?] and the @fn[inexact?]:
 
 @section{Selection}
 
-If we look at the mathematical definition of absolute value:
+If we look at the mathematical definition of the absolute value:
 
 @$${
 |x|= 
@@ -1262,16 +1261,16 @@ we notice that it uses a conditional expression in the form of
 \text{alternative expression}, & \text{otherwise}
 \end{cases}}
 
-that translates to common language as “if @emph{logical expression} then
+that is translated to common language as “if @emph{logical expression} then
 @emph{consequent expression}, otherwise @emph{alternative expression}”.
 
 The evaluation of a conditional expression is made through the evaluation of
-the @emph{logical expression} and if it is true, the @emph{consequent expression}
-is applied, if it is false then the @emph{alternative expression} is applied.
+the @emph{logical expression}: if it is true, then the @emph{consequent expression}
+is applied, but if it is false then the @emph{alternative expression} is applied.
 
 The use of conditional expressions in Racket is even easier than in
-mathematics because it is based on a simple operator, the @lisp[if]
-operator, called a selection operator since it allows to choice
+Mathematics because it is based on a simple operator - the @lisp[if]
+operator. The if operator is often called selection operator because it allows to choose
 between two alternatives. The syntax of the @lisp[if] operator is as follows:
 
 @specform[(if logical-expression consequent-expression alternative-expression)]
@@ -1282,9 +1281,9 @@ in the following way:
 @itemlist[#:style 'ordered
                   @item{The @lispemph[logical-expression] is evaluated;}
                   @item{If the previous evaluation is true, then the combination value is the @lispemph[consequent-expression];}
-                  @item{Otherwise, if the logical expression turns out to be false, the combination value is the @lispemph[alternative-expression].}]
+                  @item{Otherwise, if the @lispemph[logical-expression] turns out to be false, the combination value is the @lispemph[alternative-expression].}]
 
-Such behaviour, identical to what we would have in Mathematics, can be verified by the following examples: 
+Identical to what we would have in Mathematics, this behaviour can be verified in the following examples: 
 
 @incremental[
 (if (> 3 2)
@@ -1305,12 +1304,12 @@ doing a simple translation from the mathematical definition to Racket:
 ]
 
 The purpose of using the @lisp[if] operator is to define functions
-whose behaviour depends on one or more conditions. For example, if we
+whose behaviour depends on one or more conditions. For example, let's 
 consider the @fn[max] function that receives two numbers as arguments
 and returns the highest. To define such function we only need to test
 if the first number is higher than the second one. If it is, the
 function returns the first argument, otherwise it returns the second
-one. Based on this logic we can write:
+one. Following this logic, one can write:
 
 @def[
 (define (max x y)
@@ -1319,8 +1318,8 @@ one. Based on this logic we can write:
     y))
 ]
 
-Another far more interesting example is the mathematical function @emph{sign} @${\operatorname{sgn}},
-also known as @emph{signum} (latim for "sign"). This function could be interpreted as the @emph{dual}
+A far more interesting example is the mathematical function @${\operatorname{sgn}},
+also known as @emph{signum} (Latin for "sign"). This function could be interpreted as the @emph{dual}
 function of the absolute value function because we will have that @${x=\operatorname{sgn}(x) |x|}.
 The sign function is defined as:
 
@@ -1331,17 +1330,17 @@ The sign function is defined as:
 
 In common language, we would say that if @${x} is negative, the @${\operatorname{sgn} x} value is
 @${-1}, otherwise, if @${x} is @${0}, the value is @${0}, otherwise
-the value is @${1}. That shows that the above expression uses two conditional expressions
+the value is @${1}. This means that the above expression uses two conditional expressions
 stacked in the following way:
 
 @$${\operatorname{sgn} x = \begin{cases} 
--1 & \text{se $x<0$} \\
+-1 & \text{if $x<0$} \\
  \begin{cases}
- 0 & \text{se $x = 0$} \\
+ 0 & \text{if $x = 0$} \\
  1 & \text{otherwise}\end{cases}
 & \text{otherwise}\end{cases}}
 
-To define this function in Racket, two @lisp[if]s must be used:
+To define this function in Racket, we will have to use two @lisp[if]s:
 
 @def[
 (define (signum x)
