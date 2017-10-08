@@ -194,7 +194,7 @@ time ago and they have not been updated, possessing many archaic
 characteristics that makes them harder to learn and use. In order to
 ease the learning process and simultaneously allow our programs
 to run in different CAD environments, we are going to use a new
-language called Racket, that has been intentionally adapted for programming in
+language called @lang{}, that has been intentionally adapted for programming in
 Architecture. In this text, we will explain the fundamentals of programming using Racket,
 not only because it's easier to learn, but also for it's practical applicability.
 However, once learned, the reader should be able to apply these fundamentals
@@ -1142,16 +1142,15 @@ An important property of the arithmetic predicates @fn[<],@fn[>],@fn[=],
 @fn[<=] and @fn[>=] is they accept any number of arguments. Whenever there
 is more than one argument, the predicate is applied sequentially to
 pairs of argument. That way, @lispemphcode[(< #,(lispemphi e "1") #,(lispemphi e "2") #,(lispemphi e "3") ... #,(lispemphi e "n-1") #,(lispemphi e "n"))]
-is equivalent to @lispemphcode[(and (< #,(lispemphi e "1") #,(lispemphi e "2")) 
-                (< #,(lispemphi e "2") #,(lispemphi e "3")) 
-                ...
-                (< #,(lispemphi e "n-1") #,(lispemphi e "n")))]. This property can be seen in the following examples:
+is equivalent to @lispemphcode[(and (< #,(lispemphi e "1") #,(lispemphi e "2")) (< #,(lispemphi e "2") #,(lispemphi e "3")) ... (< #,(lispemphi e "n-1") #,(lispemphi e "n")))]. This property can be seen in the following examples:
 
 
 @incremental[
 (< 1 2 3)
 (< 1 2 2)
 ]
+
+@when-racket{
 
 @section[#:tag "sec:reconhecedores"]{Recognizers}
 
@@ -1215,7 +1214,7 @@ we have the predicates @fn[exact?] and the @fn[inexact?]:
 (inexact? 1)
 (exact? 2/3)
 ]
-
+}
 
 @questions[
 @question{What is a conditional expression? What is a logical expression?
