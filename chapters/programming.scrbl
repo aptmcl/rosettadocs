@@ -650,7 +650,7 @@ with the function's name and its parameters. The third element is the
 expression that will compute the function's value for the specified parameters. 
 In generic terms, we could say that the definition of functions is done as follows:
 
-@lispcode[
+@lispemphcode[
 (define (_name #,(lispemphi parameter "1") ... #,(lispemphi parameter "n"))
   _body)]
 
@@ -1142,8 +1142,8 @@ because everything different than @lit[#f] is considered to be true.
 An important property of the arithmetic predicates @fn[<],@fn[>],@fn[=],
 @fn[<=] and @fn[>=] is they accept any number of arguments. Whenever there
 is more than one argument, the predicate is applied sequentially to
-pairs of argument. That way, @lispcode[(< #,(lispemphi e "1") #,(lispemphi e "2") #,(lispemphi e "3") ... #,(lispemphi e "n-1") #,(lispemphi e "n"))]
-is equivalent to @lispcode[(and (< #,(lispemphi e "1") #,(lispemphi e "2")) 
+pairs of argument. That way, @lispemphcode[(< #,(lispemphi e "1") #,(lispemphi e "2") #,(lispemphi e "3") ... #,(lispemphi e "n-1") #,(lispemphi e "n"))]
+is equivalent to @lispemphcode[(and (< #,(lispemphi e "1") #,(lispemphi e "2")) 
                 (< #,(lispemphi e "2") #,(lispemphi e "3")) 
                 ...
                 (< #,(lispemphi e "n-1") #,(lispemphi e "n")))]. This property can be seen in the following examples:
@@ -1360,7 +1360,7 @@ possible that the code becomes increasingly harder to read. In this case there i
 an alternative called @stx[cond] which makes the function's
 definition easier to read. The syntax of @stx[cond] is as follows:
 
-@lispcode[
+@lispemphcode[
 (cond (#,(lispemphi expr "0,0") #,(lispemphi expr "0,1") ... #,(lispemphi expr "0,n"))
       (#,(lispemphi expr "1,0") #,(lispemphi expr "1,1") ... #,(lispemphi expr "1,m"))
       ...
@@ -1511,7 +1511,7 @@ of the previous function using the @lisp[let] form is as follows:
 
 @fn[Let] uses the following syntax: 
 
-@lispcode[
+@lispemphcode[
 (let ((#,(lispemphi name "0") #,(lispemphi expr "0"))
       (#,(lispemphi name "1") #,(lispemphi expr "1"))
       ...
