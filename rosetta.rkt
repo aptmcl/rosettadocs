@@ -33,6 +33,32 @@
 (provide (for-label (all-from-out racket2python)))
 (provide (all-from-out racket2python))
 
+(define racket-lang "Racket")
+(define python-lang "Python")
+
+(define lang (make-parameter python-lang))
+;(define lang (make-parameter racket-lang))
+
+(define-syntax (case-lang stx)
+  (syntax-case stx (python racket)
+    ((_ (racket racket-body) (python python-body))
+     #'(cond ((equal? (lang) racket-lang)
+              racket-body)
+             ((equal? (lang) python-lang)
+              python-body)
+             (else
+              (error "Unknown lang" (lang)))))))
+
+(define-syntax-rule
+  (when-racket body ...)
+  (when (equal? (lang) racket-lang)
+    (list body ...)))
+
+(define-syntax-rule
+  (when-python body ...)
+  (when (equal? (lang) python-lang)
+    (list body ...)))
+
 (define incremental-evaluator-requires (make-parameter '(rosetta/tikz)))
 
 (define mathjax-source
@@ -132,13 +158,12 @@
   (lispemphcode code ...)
   (racketblock code ...))
 
-(require (for-syntax racket2python))
-(define-syntax (lispcode stx)
-  (syntax-case stx ()
-    ((_ code ...)
-     (with-syntax (((py ...) (map python-str (syntax->datum #'(code ...)))))
-       #'(verbatim py ...)))))
-
+(require racket2python)
+(define-syntax-rule
+  (lispcode code ...)
+  (case-lang
+   (racket (racketblock code ...))
+   (python (code-inset (nested (verbatim (python-str 'code)) ...)))))
 
 
 (define (pascal . strs)
@@ -249,18 +274,21 @@ And of course you can combine these:
  (immediate-mode? #f))
 
 (define-syntax-rule
-  (incremental . args)
-  (interaction #:eval incremental-evaluator . args))
+  (incremental arg ...)
+  (case-lang
+   (racket (interaction #:eval incremental-evaluator arg ...))
+   (python (nested ;;We need to call the Python interpreter here
+             (nested
+               (verbatim ">>>" (python-str 'arg))
+               (interaction-eval-show #:eval incremental-evaluator arg)) ...))))
 
-#;
 (define-syntax-rule
-  (def . args)
-  (interaction/no-prompt #:eval incremental-evaluator . args))
-
-(define-syntax-rule
-  (def . args)
-  (begin (interaction/no-prompt #:eval incremental-evaluator . args)
-         (lispcode . args)))
+  (def arg ...)
+  (case-lang
+   (racket (interaction/no-prompt #:eval incremental-evaluator arg ...))
+   (python (begin
+             (interaction-eval #:eval incremental-evaluator (begin arg ...))
+             (verbatim (python-str 'arg) ...)))))
 
 (define-syntax-rule
   (def/no-show def ...)
@@ -279,7 +307,9 @@ And of course you can combine these:
     ((_ expr ...)
      (quasisyntax/loc stx
        (centered #,@(add-between (map (lambda (expr)
-                                        #`(para (racket #,expr)))
+                                        #`(case-lang
+                                           (racket (para (racket #,expr)))
+                                           (python (tt (python-str '#,expr)))))
                                       (syntax->list #'(expr ...)))
                                  #'(para (math-in "\\downarrow"))))))))
 
