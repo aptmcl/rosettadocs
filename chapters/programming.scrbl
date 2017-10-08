@@ -1356,7 +1356,7 @@ To define this function in Racket, we will have to use two @lisp[if]s:
 
 When a conditional expression requires more than one @lisp[if], it is
 possible that the code becomes increasingly harder to read. In this case there is
-an alternative called @stx[cond] which makes the function's
+an alternative operator called @stx[cond] which makes the function's
 definition easier to read. The syntax of @stx[cond] is as follows:
 
 @lispemphcode[
@@ -1365,22 +1365,22 @@ definition easier to read. The syntax of @stx[cond] is as follows:
       ...
       (#,(lispemphi expr "k,0") #,(lispemphi expr "k,1") ... #,(lispemphi expr "k,p")))]
 
-A @stx[cond] receives any number of arguments. Each argument is
+A @stx[cond] operator receives any number of arguments. Each argument is
 called a @emph{clause} and is made up of a list of expressions. The
 semantics of a @stx[cond] is based on evaluating sequentially the
 first expression in each clause until one of them turns out to be
 true. In that case the consequent expressions are evaluated and the
 value of the last one is returned. If none of the clauses has a first
 expression that is true, the @stx[cond] returns @lisp[\#<void>] meaning
-there is no relevant result to be returned. If the clause, in which the
+there is no relevant result to be returned. Note that if the clause, in which the
 first expression is true, has no other expressions then @stx[cond] returns
 the value of that first expression.
 
 It is important to note that the parenthesis around the clauses do not mean
-the clauses are combinations: they are simply part of the @stx[cond] syntax
+that clauses are combinations: they are simply part of the @stx[cond] syntax
 and are necessary to separate clauses from each other.
 
-The usual pragmatic used in a @stx[cond] (especially when the clause only has
+Regarding pragmatics, the common use of the @stx[cond] (especially when the clause only has
 two expressions) consists in aligning the expressions one under the other. 
 
 Using @stx[cond] the @emph{sign} function can be much easily defined:
@@ -1395,13 +1395,13 @@ Using @stx[cond] the @emph{sign} function can be much easily defined:
          1)))
 ]
 
-Note that in the previous example the last @stx[cond] clause has, as
-logical expression, the @lisp[#t] symbol. As we have seen, this last
+Note that in the previous example the last @stx[cond] clause has the @lisp[#t] 
+symbol as a logical expression. As we have seen, this last
 symbol represents true so its presence ensures that it will be
 evaluated in case none of the previous ones are. This way, a clause
 in the form of @lisp[(#t ...)] represents a "for everything else....". 
 To make the reading task easier, Racket accepts a special form for this
-last situation: @stx[else]. Using that syntax, the example can now
+last situation: @stx[else]. Using this syntax, the example above can now
 be written as:
 
 @def[
@@ -1415,11 +1415,11 @@ be written as:
 ]
 
 @questions[
-@question{Define the function @fn[sum-highest] that given 3 numbers as arguments calculates the sum of the 2 with the highest value.
+@question{Define the function @fn[sum-highest] that, given 3 numbers as arguments, calculates the sum of the 2 highest values.
 }
-@question{Define the function @fn[max3] that given 3 numbers as arguments returns the highest value. 
+@question{Define the function @fn[max3] that, given 3 numbers as arguments, returns the highest value. 
 }
-@question{Define the function @fn[second-highest] that given 3 numbers as arguments and returns the second highest number: the number between the maximum and minimum value.
+@question{Define the function @fn[second-highest] that, given 3 numbers as arguments, returns the second highest number, i.e., the number between maximum and minimum values.
 }
 ]
 
@@ -1433,8 +1433,8 @@ Let us consider the following triangle:
 \inputtikz{triangulo}
 \end{tikzpicture}}}
 
-and try to define a function in Racket to calculate the triangle's area
-from the parameters @${a}, @${b} and @${c}.
+and let us try to define a function in Racket to calculate the triangle's area
+from parameters @${a}, @${b} and @${c}.
 
 One way of calculating the area of a triangle is to use the famous Heron's formula:
 @margin-note{Heron of Alexandria was an important Greek mathematician and engineer of the
@@ -1447,9 +1447,9 @@ in which @${s} is the triangle's semi-perimeter:
 
 @$${s=\frac{a+b+c}{2}}
 
-When trying to use the Heron's formula to write the equivalent in Racket we come across a small
-problem: the formula is (also) written in terms of the semi-perimeter @${s}, but @${s} is not
-a parameter but rather a value that is derived from other parameters of the triangle.
+When we try to use the Heron's formula to write the equivalent in Racket, we come across a small
+problem: the formula is (also) written in terms of a semi-perimeter @${s}. However @${s} is not
+a parameter, but rather a value that is derived from other parameters of the triangle.
 
 One way of solving this problem is to replace @${s} with its meaning:
 
@@ -1469,12 +1469,12 @@ Unfortunately, this definition has two problems. The first one is the loss of
 correspondence between the original formula and the function definition, making
 it harder to recognize as the Heron’s formula. The second one is that the
 function is repeatedly using @lisp[(/ (+ a b c) 2)] which is a waste of human
-effort, because we had to write it four times, and a waste of computational
+effort, since we had to write it four times, and a waste of computational
 effort, because the expression needs to be calculated four times, even though
-we know it always has the same value.
+we know that it always has the same value.
 
 In order to solve this problem, Racket allows the use of @emph{local variables}.
-A local variable only has meaning in the context of a function and is used to
+A local variable has meaning only in the context of a function and is used to
 calculate intermediate values such as the semi-perimeter @lisp[s]. Using a local
 variable we can rewrite the @fn[triangle-area] function:
 
@@ -1484,21 +1484,21 @@ variable we can rewrite the @fn[triangle-area] function:
   (sqrt (* s (- s a) (- s b) (- s c))))
 ]
 
-The semantics used when definition local variables is the same as the definition
-of regular ones, with the added subtlety that its @emph{context}, i.e. the part of
-the program in which the defined name can be used, is confined to the function that
-it contains.
+The semantics used when defining local variables is the same as the definition
+of regular ones, with the added subtlety that its @emph{context}, i.e., the part of
+the program in which the defined name can be used, is confined to the function where it
+is defined.
 
-When calling the function @fn[triangle-area], giving it the arguments for the
+When we call the function @fn[triangle-area], providing it the arguments for the
 corresponding parameters @lisp[a], @lisp[b] and @lisp[c], it starts by introducing
-an additional name - @lisp[s] - associated to the value that comes from the expression
-@lisp[(/ (+ a b c) 2)] and, in the context of than new name, evaluates the remaining
+an additional name - @lisp[s] - that is associated to the value that results from the expression
+@lisp[(/ (+ a b c) 2)]. Afterwards, in the context of the new name, it evaluates the remaining
 expressions in the function's body. In practice it is as if the function was stating:
 "Knowing that @${s=\frac{a+b+c}{2}}, let us calculate
-@${\sqrt{s\left(s-a\right)\left(s-b\right)\left(s-c\right)}}."
+@${\sqrt{s\left(s-a\right)\left(s-b\right)\left(s-c\right)}}".
 
 There is another way of defining local variables that, although semantically similar
-to the previous one, has the advantage of being usable in any part where an
+to the previous one, it has the advantage of being usable in any part where an
 expression is expected. We can do that by using the @lisp[let] form. The redefinition 
 of the previous function using the @lisp[let] form is as follows:
 
@@ -1508,7 +1508,7 @@ of the previous function using the @lisp[let] form is as follows:
     (sqrt (* s (- s a) (- s b) (- s c)))))
 ]
 
-@fn[Let] uses the following syntax: 
+@fn[Let] has the following syntax: 
 
 @lispemphcode[
 (let ((#,(lispemphi name "0") #,(lispemphi expr "0"))
@@ -1520,7 +1520,7 @@ of the previous function using the @lisp[let] form is as follows:
   ...
   #,(lispemphi expr "n+m"))]
 
-The semantic of the @lisp[let] form consists of associating each name (#,(lispemphi name "i")
+The semantic of the @lisp[let] form consists of associating each name @(#,(lispemphi name "i")
 to the corresponding expression @(lispemphi expr "i") and, in the context established by that
 association, evaluate the @racket[let]'s @emph{body}, i.e., evaluate the expressions from
 @(lispemphi expr "n+1") to @(lispemphi expr "n+m") and return the value of the last one.
@@ -1539,8 +1539,8 @@ be explained in the following example:
 
 However, if we want the context to be established incrementally, thus allowing
 expressions to associate names that can depend on previous established associations,
-Racket provides the form @lisp[let*]:
-form:
+Racket provides the form @lisp[let*] form. Let us evaluate the previous example using 
+the @lisp[let*] form:
 
 @incremental[
 (let* ((pi 3)
@@ -1559,19 +1559,20 @@ be seen in the following example:
 
 @section[#:tag "sec:globalVariables"]{Global Variables}
 
-Contrary to local names that have a limited context, a @emph{global name},
-is a name that can be seen in any context of our programs. Its context is
-therefore the entire program. The name @lisp[pi] represents the constant
+Contrary to local names, that have limited context, a @emph{global name} 
+is a name that can be seen in any context in our programs, which means that its 
+context is the entire program. The name @lisp[pi] represents the constant
 @${\pi=3.14159@ldots} and can be used in any part of our program. For that
 reason, @lisp[pi] is a global name.
 
 The definition of global names is the same to that of local names, with the
 difference of being defined outside a function. Therefore, if we wish to
 introduce a new global name, for example, for the @emph{golden ratio}:
+
 @margin-note{Also known as @emph{gold proportion} and @emph{divine proportion}
-among other names, and abbreviated to @${\phi} in honour of Fineas, a Greek
+among other names, golden ratio is abbreviated to @${\phi} in honour of Fineas, a Greek
 sculptor responsible for building the Parthenon where, supposedly, this golden
-proportion was used. The golden ration was first introduced by Euclid when solving
+proportion was used. The golden ratio was first introduced by Euclid when solving
 the problem of dividing a line segment into two parts such that the ratio between
 the line segment and the longest part was equal to the ratio between the longest part
 and the shortest part. If @${a} is the length of the longest part and @${b} the
@@ -1588,12 +1589,12 @@ We simply need to write:
 (define golden-ratio (/ (+ 1 (sqrt 5)) 2))
 ]
 
-From this moment on, the @emph{golden-ration} can be referenced in any
+From this moment on, the @emph{golden-ratio} can be referenced in any
 part of our program.
 
-It should be warned that global names should be limited, when possible, to defining
-just constants, like @lisp[2pi]. Other useful examples may be @lisp[pi/2],
-@lisp[4pi] and @lisp[pi/4], as well their symmetric values, that are defined in terms of:
+We warn you to limit global names to just defining constants (e.g.:@lisp[2pi]) 
+whenever possible. Other useful constants may be @lisp[pi/2],
+@lisp[4pi] and @lisp[pi/4], as well as their symmetric values, that are defined in terms of:
 
 @def[
 (define 2pi (* 2 pi))
@@ -1617,9 +1618,9 @@ just constants, like @lisp[2pi]. Other useful examples may be @lisp[pi/2],
 
 @section{Modules}
 
-Every functionality of Racket is stored and organized @emph{modules}. Every module
+Every functionality of Racket is stored and organized in @emph{modules}. Every module
 is a unit containing a set of definitions. The @emph{Racket} language is nothing more 
-than an aggregation of modules that provide often required functionalities. There
+than an aggregation of modules that often provide the required functionalities. There
 are many other functionalities in modules that we can only have access to if we specifically
 ask for it.
 
@@ -1634,9 +1635,9 @@ Take for example the following program:
   (* pi (square r)))}
 
 The first line indicates the language in which the program is written,
-in this case, Racket. The following lines are the definitions of our
+which, in this case, is Racket. The following lines are the definitions of our
 program that, naturally, make use of Racket's functionalities. For this
-program that includes the @lisp[define] function, the arithmetic operation @lisp[*]
+program, that includes the @lisp[define] function, the arithmetic operation @lisp[*]
 and the @lisp[pi] value. 
 
 If it was necessary to have additional functionalities we would have to
@@ -1655,7 +1656,7 @@ namely the functions @lisp[plot] and @lisp[function], with the remaining names
 being provided by @lisp[Racket]'s module.
 
 The @lisp[require] form can also be used in other ways, the most useful
-being to access Racket's central modules repository, called @lisp[planet]
+being the access to Racket's central modules repository, called @lisp[planet]
 (@verb{http://planet.racket-lang.org/}). For example, for accessing the
 @lisp[rosetta] module, whose author is @lisp[aml] we should write:
 
