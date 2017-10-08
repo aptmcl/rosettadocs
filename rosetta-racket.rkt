@@ -17,7 +17,6 @@
 (provide (all-from-out scribble/manual))
 (provide (all-defined-out))
 
-(require racket2python)
 (require scribble/eval)
 (require racket/sandbox)
 
@@ -28,10 +27,7 @@
 |#
 
 (require (for-label rosetta/tikz))
-(require (for-label racket2python))
 (provide (for-label (all-from-out rosetta/tikz)))
-(provide (for-label (all-from-out racket2python)))
-(provide (all-from-out racket2python))
 
 (define incremental-evaluator-requires (make-parameter '(rosetta/tikz)))
 
@@ -125,6 +121,7 @@
 (define $ math-in)
 (define $$ math-disp)
 
+
 (define (lispf . strs)
   (apply tt strs))
 
@@ -132,14 +129,9 @@
   (lispemphcode code ...)
   (racketblock code ...))
 
-(require (for-syntax racket2python))
-(define-syntax (lispcode stx)
-  (syntax-case stx ()
-    ((_ code ...)
-     (with-syntax (((py ...) (map python-str (syntax->datum #'(code ...)))))
-       #'(verbatim py ...)))))
-
-
+(define-syntax-rule
+  (lispcode code ...)
+  (racketblock code ...))
 
 (define (pascal . strs)
   (apply tt strs))
@@ -252,15 +244,9 @@ And of course you can combine these:
   (incremental . args)
   (interaction #:eval incremental-evaluator . args))
 
-#;
 (define-syntax-rule
   (def . args)
   (interaction/no-prompt #:eval incremental-evaluator . args))
-
-(define-syntax-rule
-  (def . args)
-  (begin (interaction/no-prompt #:eval incremental-evaluator . args)
-         (lispcode . args)))
 
 (define-syntax-rule
   (def/no-show def ...)
@@ -296,31 +282,17 @@ And of course you can combine these:
   (lit e)
   (racket e))
 
-#;
 (define-syntax-rule
   (lisp expr ...)
   (racket expr ...))
 
 (define-syntax-rule
-  (lisp expr ...)
-  (verb (python-str 'expr ...)))
-#;
-(define-syntax-rule
   (lispemph expr)
   (italic (racket expr)))
 
 (define-syntax-rule
-  (lispemph expr)
-  (italic (python-str 'expr)))
-
-#;
-(define-syntax-rule
   (lispemphi id sub)
   (italic (racket id) (subscript sub)))
-
-(define-syntax-rule
-  (lispemphi id sub)
-  (italic (verb (python-str 'id)) (subscript sub)))
 
 (define (fig . body)
   (centered (apply elem body)))

@@ -125,6 +125,10 @@
 (define $ math-in)
 (define $$ math-disp)
 
+
+(define-for-syntax 
+
+
 (define (lispf . strs)
   (apply tt strs))
 
@@ -252,15 +256,9 @@ And of course you can combine these:
   (incremental . args)
   (interaction #:eval incremental-evaluator . args))
 
-#;
 (define-syntax-rule
   (def . args)
-  (interaction/no-prompt #:eval incremental-evaluator . args))
-
-(define-syntax-rule
-  (def . args)
-  (begin (interaction/no-prompt #:eval incremental-evaluator . args)
-         (lispcode . args)))
+  (lispcode . args))
 
 (define-syntax-rule
   (def/no-show def ...)
@@ -279,7 +277,7 @@ And of course you can combine these:
     ((_ expr ...)
      (quasisyntax/loc stx
        (centered #,@(add-between (map (lambda (expr)
-                                        #`(para (racket #,expr)))
+                                        #`(para (verb (python-str #,expr))))
                                       (syntax->list #'(expr ...)))
                                  #'(para (math-in "\\downarrow"))))))))
 
@@ -296,27 +294,13 @@ And of course you can combine these:
   (lit e)
   (racket e))
 
-#;
-(define-syntax-rule
-  (lisp expr ...)
-  (racket expr ...))
-
 (define-syntax-rule
   (lisp expr ...)
   (verb (python-str 'expr ...)))
-#;
-(define-syntax-rule
-  (lispemph expr)
-  (italic (racket expr)))
 
 (define-syntax-rule
   (lispemph expr)
-  (italic (python-str 'expr)))
-
-#;
-(define-syntax-rule
-  (lispemphi id sub)
-  (italic (racket id) (subscript sub)))
+  (italic (verb (python-str 'expr))))
 
 (define-syntax-rule
   (lispemphi id sub)
